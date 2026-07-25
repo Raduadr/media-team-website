@@ -65,12 +65,30 @@
         <p>&copy; 2026 CINEVRA. Toate drepturile rezervate.</p>
     </footer>
 
+    <button id="floating-hamburger" class="floating-hamburger" aria-label="Deschide meniul">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div id="mobile-menu" class="mobile-menu-overlay">
+        <nav class="mobile-nav-links">
+            <a href="#work" class="mobile-link">Proiecte</a>
+            <a href="#studio" class="mobile-link">Tenebris</a>
+            <a href="pages/contact.html" class="mobile-link">Contact</a>
+            <a href="index.html" class="lang-switch mobile-link-lang">EN</a>
+        </nav>
+    </div>
+
     <script src="js/main.js"></script>
     <script>
         const canvas = document.getElementById('scroll-canvas');
         const context = canvas.getContext('2d');
         const section = document.getElementById('trigger-section');
         const heroText = document.getElementById('hero-text-block');
+        const hamburgerBtn = document.getElementById('floating-hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
         const frameCount = 96;
         const currentFrame = index => `assets/sequence1/frame_${index.toString().padStart(3, '0')}.jpg`;
@@ -84,11 +102,29 @@
         let isVisible = false;
         let animationFrameId;
 
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('menu-open');
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('menu-open');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.src = currentFrame(i);
             img.onload = () => {
                 loadedImagesCount++;
+
+                if (i === 1) {
+                    resizeCanvas();
+                    window.addEventListener('resize', resizeCanvas);
+                }
+
                 if (loadedImagesCount === frameCount) {
                     initCanvas();
                 }
@@ -97,10 +133,7 @@
         }
 
         function initCanvas() {
-            resizeCanvas();
-            renderCanvasFrame(0);
-            window.addEventListener('scroll', updateProgress);
-            window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('scroll', updateProgress, { passive: true });
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -141,6 +174,17 @@
             }
 
             targetFrame = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
+
+            if (rect.bottom < window.innerHeight) {
+                hamburgerBtn.classList.add('visible');
+            } else {
+                hamburgerBtn.classList.remove('visible');
+
+                if (mobileMenu.classList.contains('active')) {
+                    hamburgerBtn.classList.remove('menu-open');
+                    mobileMenu.classList.remove('active');
+                }
+            }
         }
 
         function renderCanvasFrame(index) {
