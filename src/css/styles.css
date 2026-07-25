@@ -41,14 +41,15 @@ body {
     isolation: isolate;
 }
 
-.hero-video {
+.hero-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
+    display: block;
     object-fit: cover;
     z-index: 0;
-    transform: none;
+    background: #000;
 }
 
 .hero-overlay {

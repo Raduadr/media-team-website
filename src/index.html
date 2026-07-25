@@ -10,9 +10,7 @@
     <div id="trigger-section" class="video-scroll-section">
         <div class="video-sticky-wrapper">
             <header class="hero">
-                <video id="scroll-video" class="hero-video" muted playsinline preload="auto">
-                    <source src="assets/video1.mp4" type="video/mp4">
-                </video>
+                <canvas id="scroll-canvas" class="hero-canvas"></canvas>
 
                 <div class="hero-overlay"></div>
 
@@ -68,41 +66,49 @@
     </footer>
     <script src="js/main.js"></script>
     <script>
-        const video = document.getElementById('scroll-video');
+        const canvas = document.getElementById('scroll-canvas');
+        const context = canvas.getContext('2d');
         const section = document.getElementById('trigger-section');
         const heroText = document.getElementById('hero-text-block');
 
-        let targetTime = 0;
-        let currentTime = 0;
-        let hasStartedPlayback = false;
-        let idleTimer = null;
-        const interpolationFactor = 0.15;
-        const pauseAfterIdleMs = 180;
+        const frameCount = 192;
+        const currentFrame = index => `assets/sequence1/frame_${index.toString().padStart(3, '0')}.jpg`;
 
-        function startPlayback() {
-            if (!hasStartedPlayback && video) {
-                video.play().catch(() => {});
-                hasStartedPlayback = true;
+        const images = [];
+        let targetFrame = 0;
+        let currentFrameInterpolated = 0;
+        const interpolationFactor = 0.12;
+
+        let loadedImagesCount = 0;
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            img.onload = () => {
+                loadedImagesCount++;
+                if (loadedImagesCount === frameCount) {
+                    initCanvas();
+                }
+            };
+            images.push(img);
+        }
+
+        function initCanvas() {
+            resizeCanvas();
+            renderCanvasFrame(0);
+            window.addEventListener('scroll', updateProgress);
+            window.addEventListener('resize', resizeCanvas);
+            requestAnimationFrame(renderLoop);
+        }
+
+        function resizeCanvas() {
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                renderCanvasFrame(Math.round(currentFrameInterpolated));
             }
         }
 
-        function pausePlayback() {
-            if (video && !video.paused) {
-                video.pause();
-            }
-        }
-
-        function handleScrollActivity() {
-            startPlayback();
-            updateVideoProgress();
-
-            clearTimeout(idleTimer);
-            idleTimer = setTimeout(() => {
-                pausePlayback();
-            }, pauseAfterIdleMs);
-        }
-
-        function updateVideoProgress() {
+        function updateProgress() {
             const rect = section.getBoundingClientRect();
             const totalScrollableHeight = Math.max(rect.height - window.innerHeight, 1);
             const currentScrollProgress = Math.max(-rect.top, 0);
@@ -118,39 +124,44 @@
                 heroText.style.transform = `scale(${scaleValue})`;
             }
 
-            if (video.duration) {
-                targetTime = scrollFraction * video.duration;
+            targetFrame = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
+        }
+
+        function renderCanvasFrame(index) {
+            if (images[index] && context) {
+                const img = images[index];
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                const imgRatio = img.width / img.height;
+                const windowRatio = windowWidth / windowHeight;
+
+                let drawWidth, drawHeight, drawX, drawY;
+
+                if (windowRatio > imgRatio) {
+                    drawWidth = windowWidth;
+                    drawHeight = windowWidth / imgRatio;
+                    drawX = 0;
+                    drawY = (windowHeight - drawHeight) / 2;
+                } else {
+                    drawWidth = windowHeight * imgRatio;
+                    drawHeight = windowHeight;
+                    drawX = (windowWidth - drawWidth) / 2;
+                    drawY = 0;
+                }
+
+                context.clearRect(0, 0, windowWidth, windowHeight);
+                context.drawImage(img, drawX, drawY, drawWidth, drawHeight);
             }
         }
 
         function renderLoop() {
-            currentTime += (targetTime - currentTime) * interpolationFactor;
-            if (Math.abs(currentTime - targetTime) > 0.01) {
-                video.currentTime = currentTime;
-            }
-            requestAnimationFrame(renderLoop);
-        }
-
-        window.addEventListener('scroll', handleScrollActivity);
-
-        video.addEventListener('loadedmetadata', () => {
-            updateVideoProgress();
-            requestAnimationFrame(renderLoop);
-        });
-
-        if (video.readyState >= 1) {
-            updateVideoProgress();
+            currentFrameInterpolated += (targetFrame - currentFrameInterpolated) * interpolationFactor;
+            renderCanvasFrame(Math.round(currentFrameInterpolated));
             requestAnimationFrame(renderLoop);
         }
 
         window.addEventListener('load', () => {
-            if (video) {
-                video.muted = true;
-                video.playsInline = true;
-                video.pause();
-                video.currentTime = 0;
-            }
-            updateVideoProgress();
+            updateProgress();
         });
     </script>
 </body>
