@@ -28,8 +28,7 @@
                     <h1>Imaginația în acțiune</h1>
                     <p>Povestire creativă prin experiențe vizuale.</p>
                     <div class="hero-buttons">
-                        <a href="#work" class="btn btn-primary">Vezi Portofoliul</a>
-                        <a href="pages/contact.html" class="btn btn-secondary">Cunoaște Echipa</a>
+                        <a href="pages/contact.html" class="btn btn-secondary">Contactează-ne</a>
                     </div>
                 </div>
             </header>
@@ -90,12 +89,6 @@
             img.src = currentFrame(i);
             img.onload = () => {
                 loadedImagesCount++;
-
-                if (i === 1) {
-                    resizeCanvas();
-                    window.addEventListener('resize', resizeCanvas);
-                }
-
                 if (loadedImagesCount === frameCount) {
                     initCanvas();
                 }
@@ -104,7 +97,10 @@
         }
 
         function initCanvas() {
+            resizeCanvas();
+            renderCanvasFrame(0);
             window.addEventListener('scroll', updateProgress);
+            window.addEventListener('resize', resizeCanvas);
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
