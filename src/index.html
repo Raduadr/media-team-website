@@ -57,7 +57,7 @@
             <p class="eyebrow">Let’s Work Together</p>
             <h2>Ready to produce something extraordinary?</h2>
             <p>Whether the brief calls for a tight commercial, a documentary chapter, or a remote production with zero compromise, CINEVRA is ready to build the right setup for the job.</p>
-            <a href="pages/contact.html" class="btn btn-primary">Start the Conversation</a>
+            <a href="pages/contact.html" class="btn btn-primary">Contact us</a>
         </section>
     </main>
 
@@ -77,9 +77,12 @@
         const images = [];
         let targetFrame = 0;
         let currentFrameInterpolated = 0;
-        const interpolationFactor = 0.12;
+        const interpolationFactor = 0.05;
 
         let loadedImagesCount = 0;
+        let isVisible = false;
+        let animationFrameId;
+
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.src = currentFrame(i);
@@ -97,7 +100,20 @@
             renderCanvasFrame(0);
             window.addEventListener('scroll', updateProgress);
             window.addEventListener('resize', resizeCanvas);
-            requestAnimationFrame(renderLoop);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        isVisible = true;
+                        renderLoop();
+                    } else {
+                        isVisible = false;
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                });
+            });
+
+            observer.observe(section);
         }
 
         function resizeCanvas() {
@@ -118,9 +134,8 @@
             if (scrollFraction > 1) scrollFraction = 1;
 
             if (heroText) {
-                const opacityValue = 1 - scrollFraction;
                 const scaleValue = 1 + scrollFraction * 0.04;
-                heroText.style.opacity = opacityValue;
+                heroText.style.opacity = 1;
                 heroText.style.transform = `scale(${scaleValue})`;
             }
 
@@ -155,9 +170,12 @@
         }
 
         function renderLoop() {
+            if (!isVisible) return;
+
             currentFrameInterpolated += (targetFrame - currentFrameInterpolated) * interpolationFactor;
             renderCanvasFrame(Math.round(currentFrameInterpolated));
-            requestAnimationFrame(renderLoop);
+
+            animationFrameId = requestAnimationFrame(renderLoop);
         }
 
         window.addEventListener('load', () => {

@@ -18,7 +18,7 @@ body {
 
 .video-scroll-section {
     position: relative;
-    height: 180vh;
+    height: 125vh;
     background-color: #000;
 }
 
@@ -37,6 +37,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* ADD THIS to center the text horizontally */
     overflow: hidden;
     isolation: isolate;
 }
@@ -131,6 +132,8 @@ body {
 }
 
 .btn {
+    display: inline-block; /* Forces the browser to respect top/bottom padding and margins */
+    margin-top: 30px;      /* Adds breathing room between the text and the button */
     padding: 15px 35px;
     font-size: 1rem;
     font-weight: 600;
@@ -161,7 +164,11 @@ body {
 }
 
 .site-content {
+    position: relative;
+    z-index: 10;
     background: #050505;
+    margin-top: -15vh;
+    padding-top: 5vh;
 }
 
 .content-section {
@@ -189,6 +196,10 @@ body {
 .content-section h2 {
     font-size: 2rem;
     margin-bottom: 16px;
+}
+
+.content-section .btn {
+    margin-top: 24px;
 }
 
 .content-section p,
@@ -228,4 +239,22 @@ footer {
     .nav-links {
         gap: 16px;
     }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050505; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff6b3d; 
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e55a2b; 
 }
