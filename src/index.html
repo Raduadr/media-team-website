@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINEVRA | Remote Media Production</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="trigger-section" class="video-scroll-section">
+        <div class="video-sticky-wrapper">
+            <header class="hero">
+                <video id="scroll-video" class="hero-video" muted playsinline preload="auto">
+                    <source src="assets/video1.mp4" type="video/mp4">
+                </video>
+
+                <div class="hero-overlay"></div>
+
+                <nav class="hero-nav">
+                    <a href="index.html" class="logo">CINEVRA</a>
+                    <ul class="nav-links">
+                        <li><a href="#work">Work</a></li>
+                        <li><a href="#studio">Mobile Studio</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div id="hero-text-block" class="hero-content">
+                    <h1>We Engineer Vision.</h1>
+                    <p>Off-grid, solar-powered media production. From remote landscapes to the studio, we bring the setup to the story.</p>
+                    <div class="hero-buttons">
+                        <a href="#work" class="btn btn-primary">View Our Work</a>
+                        <a href="pages/contact.html" class="btn btn-secondary">Book the Van</a>
+                    </div>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <main class="site-content">
+        <section id="work" class="content-section">
+            <p class="eyebrow">Services & Capabilities</p>
+            <h2>High-end media production, executed with precision.</h2>
+            <p>We deliver cinematic commercial, documentary, and remote media for brands, agencies, and individuals who need polished storytelling without limits. From concept to final delivery, our team combines creative direction, technical discipline, and flexible production planning to keep every project moving with confidence.</p>
+        </section>
+
+        <section id="studio" class="content-section alt-section">
+            <p class="eyebrow">Mobile Studio</p>
+            <h2>Built for the edge of the story.</h2>
+            <p>Our off-grid, solar-powered production van is built on a Mercedes-Benz Sprinter chassis and designed for modern production demands. It gives us the ability to shoot, capture, and process media in remote environments while maintaining full control over power, workflow, and delivery.</p>
+            <ul>
+                <li>Self-sufficient energy for demanding shoots</li>
+                <li>Fast setup and efficient production workflows</li>
+                <li>Versatile support for commercial, documentary, and remote capture</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="content-section">
+            <p class="eyebrow">Let’s Work Together</p>
+            <h2>Ready to produce something extraordinary?</h2>
+            <p>Whether the brief calls for a tight commercial, a documentary chapter, or a remote production with zero compromise, CINEVRA is ready to build the right setup for the job.</p>
+            <a href="pages/contact.html" class="btn btn-primary">Start the Conversation</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CINEVRA. All rights reserved.</p>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        const video = document.getElementById('scroll-video');
+        const section = document.getElementById('trigger-section');
+        const heroText = document.getElementById('hero-text-block');
+
+        let targetTime = 0;
+        let currentTime = 0;
+        let hasStartedPlayback = false;
+        let idleTimer = null;
+        const interpolationFactor = 0.15;
+        const pauseAfterIdleMs = 180;
+
+        function startPlayback() {
+            if (!hasStartedPlayback && video) {
+                video.play().catch(() => {});
+                hasStartedPlayback = true;
+            }
+        }
+
+        function pausePlayback() {
+            if (video && !video.paused) {
+                video.pause();
+            }
+        }
+
+        function handleScrollActivity() {
+            startPlayback();
+            updateVideoProgress();
+
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                pausePlayback();
+            }, pauseAfterIdleMs);
+        }
+
+        function updateVideoProgress() {
+            const rect = section.getBoundingClientRect();
+            const totalScrollableHeight = Math.max(rect.height - window.innerHeight, 1);
+            const currentScrollProgress = Math.max(-rect.top, 0);
+
+            let scrollFraction = currentScrollProgress / totalScrollableHeight;
+            if (scrollFraction < 0) scrollFraction = 0;
+            if (scrollFraction > 1) scrollFraction = 1;
+
+            if (heroText) {
+                const opacityValue = 1 - scrollFraction;
+                const scaleValue = 1 + scrollFraction * 0.04;
+                heroText.style.opacity = opacityValue;
+                heroText.style.transform = `scale(${scaleValue})`;
+            }
+
+            if (video.duration) {
+                targetTime = scrollFraction * video.duration;
+            }
+        }
+
+        function renderLoop() {
+            currentTime += (targetTime - currentTime) * interpolationFactor;
+            if (Math.abs(currentTime - targetTime) > 0.01) {
+                video.currentTime = currentTime;
+            }
+            requestAnimationFrame(renderLoop);
+        }
+
+        window.addEventListener('scroll', handleScrollActivity);
+
+        video.addEventListener('loadedmetadata', () => {
+            updateVideoProgress();
+            requestAnimationFrame(renderLoop);
+        });
+
+        if (video.readyState >= 1) {
+            updateVideoProgress();
+            requestAnimationFrame(renderLoop);
+        }
+
+        window.addEventListener('load', () => {
+            if (video) {
+                video.muted = true;
+                video.playsInline = true;
+                video.pause();
+                video.currentTime = 0;
+            }
+            updateVideoProgress();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "media-team-website",
+  "version": "1.0.0",
+  "description": "A website for a production media team showcasing their portfolio and providing information about the team.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build process can be defined here.'"
+  },
+  "keywords": [
+    "media",
+    "production",
+    "portfolio",
+    "website"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
