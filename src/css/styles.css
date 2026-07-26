@@ -76,11 +76,22 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
-    padding: 30px 50px;
+    
+    /* 1. SET YOUR EXACT HEIGHT HERE */
+    height: 100px; 
+    
+    /* 2. CHANGE PADDING so it only affects left/right. 
+       The 'height' and 'align-items' will handle the top/bottom spacing now */
+    padding: 0 50px; 
+    
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* This magically keeps everything vertically centered */
     z-index: 2;
+    
+    /* 3. YOUR BACKGROUND */
+    background: rgba(5, 5, 5, 0.9); /* Solid dark glass look */
+    /* OR gradient: background: linear-gradient(to bottom, #050505, transparent); */
 }
 
 .logo {
