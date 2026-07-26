@@ -527,3 +527,172 @@ footer {
         background: #e55a2b;
     }
 }
+
+/* =========================================
+   TESTIMONIAL SECTION
+========================================= */
+.testimonial-section {
+    background-color: #0a0a0a;
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brand-separator {
+    width: 250px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ff6b3d, transparent);
+    margin-bottom: 60px;
+}
+
+.testimonial-swiper {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 60px; /* Space for the arrows */
+}
+
+.testimonial-slide {
+    text-align: center;
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+}
+
+.testimonial-slide.swiper-slide-active {
+    opacity: 1; /* Only the center quote is fully visible */
+}
+
+.quote {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.author {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Custom Arrows for Testimonials */
+.test-prev, .test-next {
+    color: #ff6b3d;
+    transform: scale(0.7); /* Slightly smaller than the main video arrows */
+}
+
+.test-prev { left: 10px; }
+.test-next { right: 10px; }
+
+/* =========================================
+   MEGA FOOTER
+========================================= */
+.site-footer {
+    background-color: #050505;
+    padding: 80px 50px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.slogan {
+    color: #ff6b3d;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+
+.footer-col h3 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.footer-links, .footer-contact {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li, .footer-contact li {
+    margin-bottom: 15px;
+}
+
+.footer-links a, .footer-contact a, .footer-contact li {
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover, .footer-contact a:hover {
+    color: #ffffff;
+}
+
+.footer-legal {
+    margin-top: 40px;
+}
+
+.footer-legal p, .footer-legal a {
+    color: #666666;
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.footer-legal a:hover {
+    color: #ff6b3d;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: center;
+    padding-left: 7vh;
+}
+
+.social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: #ff6b3d;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 60px 20px 30px;
+    }
+    .testimonial-swiper {
+        padding: 0 40px;
+    }
+}
