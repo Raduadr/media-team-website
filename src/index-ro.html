@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CINEVRA | Producție Media la Distanță</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -36,10 +37,35 @@
     </div>
 
     <main class="site-content">
-        <section id="work" class="content-section">
-            <p class="eyebrow">Servicii și Capacități</p>
-            <h2>Producție media de nivel înalt, executată cu precizie.</h2>
-            <p>Livrăm producție cinematică, documentare și media la distanță pentru branduri, agenții și persoane care au nevoie de povestiri poliate fără limite. De la concept la livrare finală, echipa noastră combină direcție creativă, disciplină tehnică și planificare flexibilă pentru a păstra fiecare proiect în mișcare cu încredere.</p>
+        <section class="services-capabilities" id="services">
+            <div class="services-content">
+                <h2 class="section-title">Servicii și Capacități</h2>
+                <p class="services-description">
+                    Producție cinematică de nivel înalt, interacțiuni cu accent pe mișcare și experiențe digitale optimizate pentru performanță.
+                </p>
+            </div>
+
+            <div class="swiper video-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="glass-overlay"></div>
+                        <iframe src="https://www.youtube.com/embed/tpiyEe_CqO4?rel=0&modestbranding=1&playsinline=1" title="Placeholder 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="glass-overlay"></div>
+                        <iframe src="https://www.youtube.com/embed/hY7m5jjJ9mM?rel=0&modestbranding=1&playsinline=1" title="Placeholder 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="glass-overlay"></div>
+                        <iframe src="https://www.youtube.com/embed/cbP2N1BQdYc?rel=0&modestbranding=1&playsinline=1" title="Placeholder 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </section>
 
         <section id="studio" class="content-section alt-section">
@@ -80,6 +106,7 @@
         </nav>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script>
         const canvas = document.getElementById('scroll-canvas');

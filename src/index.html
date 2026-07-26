@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CINEVRA | Remote Media Production</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -36,10 +37,35 @@
     </div>
 
     <main class="site-content">
-        <section id="work" class="content-section">
-            <p class="eyebrow">Services & Capabilities</p>
-            <h2>High-end media production, executed with precision.</h2>
-            <p>We deliver cinematic commercial, documentary, and remote media for brands, agencies, and individuals who need polished storytelling without limits. From concept to final delivery, our team combines creative direction, technical discipline, and flexible production planning to keep every project moving with confidence.</p>
+        <section class="services-capabilities" id="services">
+            <div class="services-content">
+                <h2 class="section-title">Services & Capabilities</h2>
+                <p class="services-description">
+                    High-end cinematic production, motion-heavy interactions, and performance-optimized digital experiences.
+                </p>
+            </div>
+
+            <div class="swiper video-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="glass-overlay"></div>
+                        <iframe src="https://www.youtube.com/embed/tpiyEe_CqO4?rel=0&modestbranding=1&playsinline=1" title="Placeholder 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="glass-overlay"></div>
+                        <iframe src="https://www.youtube.com/embed/hY7m5jjJ9mM?rel=0&modestbranding=1&playsinline=1" title="Placeholder 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="glass-overlay"></div>
+                        <iframe src="https://www.youtube.com/embed/cbP2N1BQdYc?rel=0&modestbranding=1&playsinline=1" title="Placeholder 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </section>
 
         <section id="studio" class="content-section alt-section">
@@ -80,6 +106,7 @@
         </nav>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script>
         const canvas = document.getElementById('scroll-canvas');

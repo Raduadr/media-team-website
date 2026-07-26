@@ -2,6 +2,30 @@
 // It includes form validation, interactive elements, and dynamic content loading.
 
 document.addEventListener('DOMContentLoaded', function() {
+    if (window.Swiper && document.querySelector('.video-swiper')) {
+        new Swiper('.video-swiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            loop: true,
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 50,
+                depth: 200,
+                modifier: 1,
+                slideShadows: false,
+            },
+            slideToClickedSlide: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            observer: true,
+            observeParents: true,
+        });
+    }
+
     // Example of form validation for the contact form
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
