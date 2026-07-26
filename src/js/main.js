@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             centeredSlides: true,
             slidesPerView: 'auto',
             loop: true,
+            speed: 800,
             coverflowEffect: {
                 rotate: 0,
                 stretch: 50,
