@@ -37,7 +37,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* ADD THIS to center the text horizontally */
+    align-items: center;
     overflow: hidden;
     isolation: isolate;
 }
@@ -149,8 +149,8 @@ body {
 }
 
 .btn {
-    display: inline-block; /* Forces the browser to respect top/bottom padding and margins */
-    margin-top: 30px;      /* Adds breathing room between the text and the button */
+    display: inline-block;
+    margin-top: 30px;
     padding: 15px 35px;
     font-size: 1rem;
     font-weight: 600;
@@ -183,9 +183,21 @@ body {
 .site-content {
     position: relative;
     z-index: 10;
-    background: #050505;
-    margin-top: -15vh;
-    padding-top: 5vh;
+    background: transparent;
+    margin-top: -20vh; /* Pulls the section up over the video */
+    padding-top: 10vh; /* Creates empty space for the fade gradient */
+}
+
+/* Creates the fade-out mask over the video */
+.site-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh; /* Matches the padding-top perfectly */
+    background: linear-gradient(to bottom, transparent, #050505);
+    pointer-events: none;
 }
 
 .content-section {
@@ -238,12 +250,22 @@ footer {
 }
 
 .services-capabilities {
+    position: relative; 
     padding: 120px 0;
-    background-color: #000;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* Stacks the gradient precisely over the image */
+    background: 
+        linear-gradient(to bottom, #050505 15%, rgba(5, 5, 5, 0.10) 1000px),
+        url('../assets/image3.jpg') center/cover no-repeat;
+    background-color: #050505; /* Fallback color */
+}
+
+.services-content, .video-swiper {
+    position: relative;
+    z-index: 2;
 }
 
 .services-content {
@@ -275,8 +297,8 @@ footer {
     max-width: 90vw;
     aspect-ratio: 16 / 9;
     position: relative;
-    transition: opacity 0.4s ease;
     opacity: 0.2;
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
 .swiper-slide-active {
@@ -296,8 +318,12 @@ footer {
     inset: 0;
     border-radius: 6px;
     background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0));
-    pointer-events: none;
     z-index: 1;
+    cursor: pointer;
+}
+
+.swiper-slide-active .glass-overlay {
+    pointer-events: none; 
 }
 
 .swiper-button-next,
