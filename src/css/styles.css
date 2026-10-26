@@ -94,6 +94,27 @@ body {
     /* OR gradient: background: linear-gradient(to bottom, #050505, transparent); */
 }
 
+/* Noua stilizare pentru containerul și imaginea logoului */
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%; /* Îi permite să se alinieze pe axa verticală din nav */
+    margin-top: 15px; /* Elimină orice spațiu nedorit deasupra */
+}
+
+.site-logo {
+    height: 75px;  /* Modifică această valoare (ex: 40px sau 50px) pentru a mări/micșora logoul pe site */
+    width: auto;   /* Păstrează proporțiile intacte și previne deformarea imaginii */
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+/* Efect opțional: logoul devine ușor transparent când pui mouse-ul pe el */
+.logo-container:hover .site-logo {
+    opacity: 0.85;
+}
+
 .logo {
     color: #fff;
     font-size: 1.5rem;
