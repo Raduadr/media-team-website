@@ -2,6 +2,7 @@
 // It includes form validation, interactive elements, and dynamic content loading.
 
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Inițializare Slider Video (Coverflow)
     if (window.Swiper && document.querySelector('.video-swiper')) {
         new Swiper('.video-swiper', {
             effect: 'coverflow',
@@ -21,6 +22,23 @@ document.addEventListener('DOMContentLoaded', function() {
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
+            },
+            observer: true,
+            observeParents: true,
+        });
+    }
+
+    // 2. REPARARE: Inițializare Slider Testimoniale și legarea săgeților unice
+    if (window.Swiper && document.querySelector('.testimonial-swiper')) {
+        new Swiper('.testimonial-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            speed: 600,
+            grabCursor: true,
+            navigation: {
+                nextEl: '.test-next', // Conectează săgeata dreapta din HTML
+                prevEl: '.test-prev', // Conectează săgeata stânga din HTML
             },
             observer: true,
             observeParents: true,

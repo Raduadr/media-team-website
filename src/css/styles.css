@@ -339,7 +339,8 @@ footer {
     aspect-ratio: 16 / 9;
     position: relative;
     opacity: 0.2;
-    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); 
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    padding: 0 20px; /* Adds horizontal spacing between slides */ 
 }
 
 .swiper-slide-active {
@@ -552,25 +553,28 @@ footer {
 /* =========================================
    TESTIMONIAL SECTION
 ========================================= */
+
 .testimonial-section {
     background-color: #0a0a0a;
-    padding: 80px 20px;
+    padding: 90px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .brand-separator {
     width: 250px;
     height: 3px;
     background: linear-gradient(90deg, transparent, #ff6b3d, transparent);
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .testimonial-swiper {
     width: 100%;
     max-width: 900px;
-    padding: 0 60px; /* Space for the arrows */
+    padding: 0 70px; /* Creează culoar spațios lateral pentru săgeți */
+    position: relative; /* REPARARE: Context de poziționare pentru coordonatele top: 50% */
 }
 
 .testimonial-slide {
@@ -580,34 +584,60 @@ footer {
 }
 
 .testimonial-slide.swiper-slide-active {
-    opacity: 1; /* Only the center quote is fully visible */
+    opacity: 1; /* Doar textul central activ este clar vizibil */
 }
 
 .quote {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
     font-weight: 300;
     line-height: 1.6;
     color: #e0e0e0;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     font-style: italic;
 }
 
 .author {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #ffffff;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
-/* Custom Arrows for Testimonials */
-.test-prev, .test-next {
+/* RIDICARE ȘI DEBLOCARE BUTOANE NAVIGARE */
+.testimonial-swiper .test-prev,
+.testimonial-swiper .test-next {
     color: #ff6b3d;
-    transform: scale(0.7); /* Slightly smaller than the main video arrows */
+    top: 50% !important; /* Aliniere verticală pe centrul matematic al containerului */
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    z-index: 100 !important; /* Forțează săgeata să iasă deasupra oricărui text sau fundal */
+    width: 30px;
+    height: 30px;
+    cursor: pointer !important;
 }
 
-.test-prev { left: 10px; }
-.test-next { right: 10px; }
+.testimonial-swiper .test-prev {
+    left: 15px !important; /* Poziționat curat la marginea stângă a sliderului */
+    right: auto !important;
+}
+
+.testimonial-swiper .test-next {
+    right: 15px !important; /* Poziționat curat la marginea dreaptă a sliderului */
+    left: auto !important;
+}
+
+.testimonial-swiper .test-prev:after,
+.testimonial-swiper .test-next:after {
+    font-size: 2.2rem !important; /* Dimensiune optimizată, discretă pentru citate */
+    font-weight: bold;
+}
+
+.testimonial-swiper .swiper-button-next:hover,
+.testimonial-swiper .swiper-button-prev:hover {
+    color: #ffffff;
+}
+
 
 /* =========================================
    MEGA FOOTER
