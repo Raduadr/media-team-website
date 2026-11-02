@@ -90,15 +90,27 @@ document.addEventListener('DOMContentLoaded', function() {
             clone.setAttribute('tabindex', '-1');
             clone.setAttribute('aria-pressed', 'false');
             clone.disabled = true;
-            // Ne asigurăm că imaginea internă folosește calea corectă din HTML
-            const img = clone.querySelector('img');
-            if (img && img.getAttribute('src').startsWith('http')) {
-                const artistName = clone.querySelector('.artist-slide-caption')?.textContent?.trim()?.toUpperCase() || '';
-                if (artistName) {
-                    img.src = `../assets/Artisti/${artistName}/${artistName.charAt(0) + artistName.slice(1).toLowerCase()}1.jpeg`;
-                }
+
+            // Extragem numele artistului din elementul de caption text
+            const artistName = clone.querySelector('.artist-slide-caption')?.textContent?.trim() || '';
+            const artistNameUpper = artistName.toUpperCase();
+
+            // 1. Actualizăm textul masiv de fundal (Typography Stroke)
+            const typographyStroke = clone.querySelector('.typography-stroke');
+            if (typographyStroke && artistNameUpper) {
+                typographyStroke.textContent = artistNameUpper;
+            }
+
+            // 2. Actualizăm imaginea din noul wrapper izolat
+            const img = clone.querySelector('.artist-slide-image-wrapper img');
+            if (img && artistName) {
+                // Generăm calea locală corectă pe baza numelui extras
+                const folderName = artistNameUpper === '3FU' ? '3FU' : artistNameUpper;
+                const fileName = artistName.charAt(0).toUpperCase() + artistName.slice(1).toLowerCase();
+                img.src = `../assets/Artisti/${folderName}/${fileName}1.jpeg`;
             }
         }
+
 
         const physicalSlides = [...track.children];
         let currentArtistIndex = 0;
@@ -197,6 +209,25 @@ document.addEventListener('DOMContentLoaded', function() {
             currentPhysicalIndex = physicalIndex;
             centerSlide(physicalIndex, animate);
             artistSlider.dataset.activeIndex = String(nextIndex);
+            // Adăugați acest bloc în interiorul funcției selectArtist, imediat după ce se aplică clasa 'is-active'
+            const allVisibleSlides = document.querySelectorAll('.artist-slide');
+            allVisibleSlides.forEach(slide => {
+                const textSpan = slide.querySelector('.typography-stroke');
+                if (textSpan) {
+                    const nameLength = textSpan.textContent.trim().length;
+                    
+                    // Dacă numele are mai mult de 5 litere (ex: ADELISHA are 8), micșorăm fontul dinamic
+                    if (nameLength > 5) {
+                        // Ajustează dimensiunea în funcție de numărul de caractere
+                        const dynamicSize = Math.max(2.2, 7.5 - (nameLength - 5) * 0.7); 
+                        textSpan.style.fontSize = `clamp(2rem, ${dynamicSize}vw, ${dynamicSize + 2}rem)`;
+                    } else {
+                        // Nume scurte (XENY, 3FU) își păstrează dimensiunea maximă standard
+                        textSpan.style.fontSize = '';
+                    }
+                }
+            });
+
         };
 
         const moveArtist = direction => {
