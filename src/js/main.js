@@ -5,16 +5,84 @@ document.addEventListener('DOMContentLoaded', function() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const artistSlider = document.querySelector('[data-artist-slider]');
-    if (artistSlider) {
-        const viewport = artistSlider.querySelector('[data-artist-viewport]');
-        const track = artistSlider.querySelector('[data-artist-track]');
-        const slides = [...artistSlider.querySelectorAll('[data-artist-slide]')];
-        const recordStack = document.querySelector('[data-artist-records]');
-        const albumDetails = document.querySelector('[data-current-album]');
-        const selectedArtist = document.querySelector('[data-selected-artist]');
-        const firstClone = slides[0].cloneNode(true);
-        const lastClone = slides[slides.length - 1].cloneNode(true);
-        [firstClone, lastClone].forEach(clone => {
+        if (artistSlider) {
+            const viewport = artistSlider.querySelector('[data-artist-viewport]');
+            const track = artistSlider.querySelector('[data-artist-track]');
+            const slides = [...artistSlider.querySelectorAll('[data-artist-slide]')];
+            const recordStack = document.querySelector('[data-artist-records]');
+            const albumDetails = document.querySelector('[data-current-album]');
+            const selectedArtist = document.querySelector('[data-selected-artist]');
+
+            const artists = [
+                {
+                    name: 'Xeny',
+                    image: '../assets/Artisti/XENY/Xeny1.jpeg',
+                    albums: [
+                        { title: 'Glass Garden', year: '2025', tracks: [['Afterglow', '03:42'], ['Slow Motion', '02:58'], ['Paper Moons', '04:06']] },
+                        { title: 'Neon Veil', year: '2024', tracks: [['Velvet Static', '03:17'], ['Blue Hours', '03:51'], ['Quiet Fire', '02:46']] }
+                    ]
+                },
+                {
+                    name: '3fu',
+                    image: '../assets/Artisti/3FU/3fu1.jpeg',
+                    albums: [
+                        { title: 'Night Signals', year: '2025', tracks: [['No Reply', '02:49'], ['Streetlight', '03:21'], ['Low Battery', '02:37']] },
+                        { title: 'Concrete Dreams', year: '2024', tracks: [['Cold Start', '03:14'], ['Sideways', '02:56'], ['Last Train', '03:33']] }
+                    ]
+                },
+                {
+                    name: 'Veart',
+                    image: '../assets/Artisti/VEART/Veart1.jpeg',
+                    albums: [
+                        { title: 'Red Horizon', year: '2025', tracks: [['Open Roads', '03:26'], ['Northbound', '04:02'], ['Dust & Gold', '03:18']] },
+                        { title: 'Soft Focus', year: '2023', tracks: [['Almost There', '02:57'], ['Warm Lights', '03:40'], ['First Rain', '03:09']] }
+                    ]
+                },
+                {
+                    name: 'Adelisha',
+                    image: '../assets/Artisti/ADELISHA/Adelisha1.jpeg',
+                    albums: [
+                        { title: 'Silver Lining', year: '2025', tracks: [['Satellite Heart', '03:38'], ['In Between', '03:04'], ['Stay a While', '04:13']] },
+                        { title: 'Soft Geometry', year: '2024', tracks: [['Half Awake', '02:53'], ['Make Believe', '03:31'], ['Slow Burn', '03:46']] }
+                    ]
+                },
+                {
+                    name: 'Ciucan',
+                    image: '../assets/Artisti/CIUCAN/Ciucan1.jpeg',
+                    albums: [
+                        { title: 'Silver Lining', year: '2025', tracks: [['Satellite Heart', '03:38'], ['In Between', '03:04'], ['Stay a While', '04:13']] },
+                        { title: 'Soft Geometry', year: '2024', tracks: [['Half Awake', '02:53'], ['Make Believe', '03:31'], ['Slow Burn', '03:46']] }
+                    ]
+                },
+                {
+                    name: 'Amon',
+                    image: '../assets/Artisti/AMON/Amon1.jpeg',
+                    albums: [
+                        { title: 'After the Echo', year: '2025', tracks: [['Small Hours', '03:27'], ['Fade Out', '03:56'], ['Nothing Personal', '02:59']] },
+                        { title: 'The Quiet Machine', year: '2023', tracks: [['Signal Loss', '03:10'], ['Runaway Season', '04:05'], ['Home Again', '03:22']] }
+                    ]
+                }
+            ];
+
+        // REPARARE CLONARE MULTIPLĂ (3 în stânga, 3 în dreapta pentru umplerea ecranului)
+        const CLONE_COUNT = 3;
+        
+        // Adăugăm clone la sfârșit (primele 3 slide-uri)
+        for (let i = 0; i < CLONE_COUNT; i++) {
+            const clone = slides[i % slides.length].cloneNode(true);
+            cleanClone(clone);
+            track.append(clone);
+        }
+        
+        // Adăugăm clone la început (ultimele 3 slide-uri)
+        for (let i = 0; i < CLONE_COUNT; i++) {
+            const index = (slides.length - 1 - i + slides.length) % slides.length;
+            const clone = slides[index].cloneNode(true);
+            cleanClone(clone);
+            track.prepend(clone);
+        }
+
+        function cleanClone(clone) {
             clone.classList.remove('is-active');
             clone.removeAttribute('data-artist-slide');
             clone.removeAttribute('data-artist-index');
@@ -22,55 +90,19 @@ document.addEventListener('DOMContentLoaded', function() {
             clone.setAttribute('tabindex', '-1');
             clone.setAttribute('aria-pressed', 'false');
             clone.disabled = true;
-        });
-        track.prepend(lastClone);
-        track.append(firstClone);
-        const physicalSlides = [...track.children];
-        const artists = [
-            {
-                name: 'Xeny',
-                image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=85',
-                albums: [
-                    { title: 'Glass Garden', year: '2025', tracks: [['Afterglow', '03:42'], ['Slow Motion', '02:58'], ['Paper Moons', '04:06']] },
-                    { title: 'Neon Veil', year: '2024', tracks: [['Velvet Static', '03:17'], ['Blue Hours', '03:51'], ['Quiet Fire', '02:46']] }
-                ]
-            },
-            {
-                name: '3fu',
-                image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=85',
-                albums: [
-                    { title: 'Night Signals', year: '2025', tracks: [['No Reply', '02:49'], ['Streetlight', '03:21'], ['Low Battery', '02:37']] },
-                    { title: 'Concrete Dreams', year: '2024', tracks: [['Cold Start', '03:14'], ['Sideways', '02:56'], ['Last Train', '03:33']] }
-                ]
-            },
-            {
-                name: 'Veart Ciucan',
-                image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=85',
-                albums: [
-                    { title: 'Red Horizon', year: '2025', tracks: [['Open Roads', '03:26'], ['Northbound', '04:02'], ['Dust & Gold', '03:18']] },
-                    { title: 'Soft Focus', year: '2023', tracks: [['Almost There', '02:57'], ['Warm Lights', '03:40'], ['First Rain', '03:09']] }
-                ]
-            },
-            {
-                name: 'Adelisha',
-                image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=800&q=85',
-                albums: [
-                    { title: 'Silver Lining', year: '2025', tracks: [['Satellite Heart', '03:38'], ['In Between', '03:04'], ['Stay a While', '04:13']] },
-                    { title: 'Soft Geometry', year: '2024', tracks: [['Half Awake', '02:53'], ['Make Believe', '03:31'], ['Slow Burn', '03:46']] }
-                ]
-            },
-            {
-                name: 'Amon',
-                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85',
-                albums: [
-                    { title: 'After the Echo', year: '2025', tracks: [['Small Hours', '03:27'], ['Fade Out', '03:56'], ['Nothing Personal', '02:59']] },
-                    { title: 'The Quiet Machine', year: '2023', tracks: [['Signal Loss', '03:10'], ['Runaway Season', '04:05'], ['Home Again', '03:22']] }
-                ]
+            // Ne asigurăm că imaginea internă folosește calea corectă din HTML
+            const img = clone.querySelector('img');
+            if (img && img.getAttribute('src').startsWith('http')) {
+                const artistName = clone.querySelector('.artist-slide-caption')?.textContent?.trim()?.toUpperCase() || '';
+                if (artistName) {
+                    img.src = `../assets/Artisti/${artistName}/${artistName.charAt(0) + artistName.slice(1).toLowerCase()}1.jpeg`;
+                }
             }
-        ];
+        }
 
+        const physicalSlides = [...track.children];
         let currentArtistIndex = 0;
-        let currentPhysicalIndex = 1;
+        let currentPhysicalIndex = CLONE_COUNT; // Indexul pornește acum de la numărul de clone adăugate
         let currentAlbumIndex = 0;
         let wrapResetPending = false;
         let isArtistTransitioning = false;
@@ -175,25 +207,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const nextIndex = (currentArtistIndex + direction + artists.length) % artists.length;
             const nextPhysicalIndex = currentPhysicalIndex + direction;
-            wrapResetPending = nextPhysicalIndex === 0 || nextPhysicalIndex === physicalSlides.length - 1;
+            
+            // Verifică dacă am intrat în zona de clone din stânga (sub CLONE_COUNT) sau din dreapta
+            wrapResetPending = nextPhysicalIndex < CLONE_COUNT || nextPhysicalIndex >= physicalSlides.length - CLONE_COUNT;
             isArtistTransitioning = !prefersReducedMotion;
             selectArtist(nextIndex, nextPhysicalIndex);
+            
             if (isArtistTransitioning) {
                 artistTransitionTimer = window.setTimeout(finishArtistTransition, 900);
             }
             if (wrapResetPending && prefersReducedMotion) {
-                currentPhysicalIndex = nextPhysicalIndex === 0 ? slides.length : 1;
+                currentPhysicalIndex = nextPhysicalIndex < CLONE_COUNT ? slides.length + nextPhysicalIndex : nextPhysicalIndex - slides.length;
                 centerSlide(currentPhysicalIndex, false);
                 wrapResetPending = false;
             }
         };
+
 
         const finishArtistTransition = () => {
             if (!isArtistTransitioning) return;
             window.clearTimeout(artistTransitionTimer);
             artistTransitionTimer = 0;
             if (wrapResetPending) {
-                currentPhysicalIndex = currentPhysicalIndex === 0 ? slides.length : 1;
+                // Salt invizibil înapoi în zona centrală
+                if (currentPhysicalIndex < CLONE_COUNT) {
+                    currentPhysicalIndex = slides.length + currentPhysicalIndex;
+                } else if (currentPhysicalIndex >= physicalSlides.length - CLONE_COUNT) {
+                    currentPhysicalIndex = currentPhysicalIndex - slides.length;
+                }
                 wrapResetPending = false;
                 physicalSlides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === currentPhysicalIndex));
                 centerSlide(currentPhysicalIndex, false);
@@ -201,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isArtistTransitioning = false;
             if (queuedArtistMoves.length) moveArtist(queuedArtistMoves.shift());
         };
+
 
         track.addEventListener('transitionend', event => {
             if (event.target !== track || event.propertyName !== 'transform' || !isArtistTransitioning) return;
@@ -225,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         window.addEventListener('resize', () => centerSlide(currentPhysicalIndex, false), { passive: true });
 
-        selectArtist(0, 1, false);
+        selectArtist(0, CLONE_COUNT, false);
     }
 
     const portfolioHeader = document.querySelector('.portfolio-header');
