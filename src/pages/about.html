@@ -3,43 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About CINEVRA</title>
+    <title>CINEVRA | Tenebris Artists</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/artists.css">
 </head>
-<body>
+<body class="about-page">
     <header>
-        <h1>About CINEVRA</h1>.
-        <nav>
-            <ul>
+        <a class="tenebris-brand" href="../index.html" aria-label="CINEVRA Studios home">
+            <img class="tenebris-logo" src="../assets/tenebris-logo.png" alt="">
+            <span>Tenebris</span>
+        </a>
+        <nav aria-label="Main navigation">
+            <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="portfolio.html">Work</a></li>
+                <li><a href="portfolio.html">Projects</a></li>
+                <li><a href="about.html" class="is-current" aria-current="page">Tenebris</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="about-ro.html" class="language-switch is-english" aria-label="Switch language to Romanian" title="Switch language to Romanian"><span class="language-option">RO</span><span class="language-option is-current">EN</span></a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <section id="story">
-            <h2>Our Story</h2>
-            <p>CINEVRA was built at the intersection of cinematic craft and technical problem-solving. Our background in industrial design and production engineering informs how we approach every project: with precision, adaptability, and a commitment to delivering exceptional results in any setting.</p>
-            <p>We believe sustainable, high-tech production is not a compromise; it is a competitive advantage. Our solar-powered mobile studio allows us to work responsibly while maintaining the flexibility and technical capability required for modern commercial, documentary, and remote media production.</p>
+    <main class="artist-page">
+        <section class="artist-showcase" aria-label="Featured artists">
+            <div class="artist-slider" data-artist-slider role="region" aria-roledescription="carousel" aria-label="Featured artists">
+                <button class="artist-arrow artist-arrow-previous" type="button" data-artist-previous aria-label="Previous artist">←</button>
+                <div class="artist-slider-viewport" data-artist-viewport>
+                    <div class="artist-slider-track" data-artist-track>
+                        <button class="artist-slide is-active" type="button" data-artist-slide data-artist-index="0" aria-pressed="true" aria-label="Select Xeny">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="" fetchpriority="high">
+                            <span class="artist-slide-overlay"></span>
+                            <span class="artist-slide-number">01 / 05</span>
+                            <span class="artist-slide-name">Xeny</span>
+                            <span class="artist-slide-caption">Xeny</span>
+                        </button>
+                        <button class="artist-slide" type="button" data-artist-slide data-artist-index="1" aria-pressed="false" aria-label="Select 3fu">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="" loading="lazy">
+                            <span class="artist-slide-overlay"></span>
+                            <span class="artist-slide-number">02 / 05</span>
+                            <span class="artist-slide-name">3fu</span>
+                            <span class="artist-slide-caption">3fu</span>
+                        </button>
+                        <button class="artist-slide" type="button" data-artist-slide data-artist-index="2" aria-pressed="false" aria-label="Select Veart Ciucan">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="" loading="lazy">
+                            <span class="artist-slide-overlay"></span>
+                            <span class="artist-slide-number">03 / 05</span>
+                            <span class="artist-slide-name">Veart Ciucan</span>
+                            <span class="artist-slide-caption">Veart Ciucan</span>
+                        </button>
+                        <button class="artist-slide" type="button" data-artist-slide data-artist-index="3" aria-pressed="false" aria-label="Select Adelisha">
+                            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="" loading="lazy">
+                            <span class="artist-slide-overlay"></span>
+                            <span class="artist-slide-number">04 / 05</span>
+                            <span class="artist-slide-name">Adelisha</span>
+                            <span class="artist-slide-caption">Adelisha</span>
+                        </button>
+                        <button class="artist-slide" type="button" data-artist-slide data-artist-index="4" aria-pressed="false" aria-label="Select Amon">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="" loading="lazy">
+                            <span class="artist-slide-overlay"></span>
+                            <span class="artist-slide-number">05 / 05</span>
+                            <span class="artist-slide-name">Amon</span>
+                            <span class="artist-slide-caption">Amon</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="artist-arrow artist-arrow-next" type="button" data-artist-next aria-label="Next artist">→</button>
+            </div>
         </section>
 
-        <section id="team">
-            <h2>Meet the Team</h2>
-            <div class="team-member">
-                <h3>[Name]</h3>
-                <p>[Role]</p>
-                <p>[Short bio: background, specialty, and approach to production]</p>
-            </div>
-            <div class="team-member">
-                <h3>[Name]</h3>
-                <p>[Role]</p>
-                <p>[Short bio: experience, creative focus, and technical strengths]</p>
+        <section class="artist-discography" aria-label="Artist albums">
+            <h2 class="artist-selected-name" data-selected-artist aria-live="polite">Xeny</h2>
+            <p class="artist-placeholder-note">Album and track names are temporary samples and will be replaced with your final list.</p>
+            <div class="artist-record-player">
+                <div class="artist-record-carousel" aria-label="Choose an album">
+                    <div class="artist-record-stack" data-artist-records></div>
+                    <button class="artist-album-next" type="button" data-album-next aria-label="Next album">→</button>
+                </div>
+                <div class="artist-album-details" data-current-album aria-live="polite"></div>
             </div>
         </section>
+
+        <section class="artist-contact" id="contact">
+            <p class="artist-eyebrow">HAVE A STORY TO TELL?</p>
+            <h2>Want to make<br><span>something together?</span></h2>
+            <p>Tell us what you have in mind. We would love to hear about your next release, music video, or creative project.</p>
+            <a class="btn btn-primary artist-contact-button" href="contact.html"><span class="button-label">Contact Us</span><span class="glow-particles" aria-hidden="true"></span></a>
+        </section>
     </main>
-    <footer>
-        <p>&copy; 2026 CINEVRA. All rights reserved.</p>
+    <footer class="site-footer">
+        <p class="footer-copyright">&copy; 2026 CINEVRA. All rights reserved.</p>
+        <div class="footer-grid">
+            <div class="footer-col brand-col">
+                <a href="../index.html" class="logo footer-logo">CINEVRA</a>
+                <p class="slogan">The art of being creative</p>
+                <div class="footer-legal">
+                    <a href="#">Terms &amp; Conditions</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Audio-Visual Production</a></li>
+                    <li><a href="#">Mobile Studio Hire</a></li>
+                    <li><a href="#">Cinematography</a></li>
+                    <li><a href="#">Post-Production</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Quicklinks</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html">Tenebris Team</a></li>
+                    <li><a href="portfolio.html">Our Portfolio</a></li>
+                    <li><a href="#">Equipment</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul class="footer-contact">
+                    <li>Bucharest, Romania</li>
+                    <li><a href="mailto:contact@cinevra.com">contact@cinevra.com</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">IN</a>
+                    <a href="#" class="social-icon">FB</a>
+                </div>
+            </div>
+        </div>
     </footer>
     <script src="../js/main.js"></script>
 </body>

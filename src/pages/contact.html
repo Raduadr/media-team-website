@@ -3,318 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact CINEVRA | Imaginația în Acțiune</title>
-    
-    <style>
-        /* =========================================
-           CORE STYLES & RESET
-        ========================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body, html {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100dvh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* =========================================
-           NAVIGATION (Matched to CINEVRA theme)
-        ========================================= */
-        header {
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #050505;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .logo {
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-block;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #ff6b3d;
-            border-color: #ff6b3d;
-            background-color: rgba(255, 107, 61, 0.1);
-        }
-
-        /* =========================================
-           MAIN LAYOUT
-        ========================================= */
-        main {
-            flex: 1;
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .page-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .page-subtitle {
-            text-align: center;
-            color: #a0a0a0;
-            max-width: 700px;
-            margin: 0 auto 60px;
-            font-size: 1.1rem;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        /* =========================================
-           FORM STYLING
-        ========================================= */
-        .form-section {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 40px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #ff6b3d;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        input, textarea {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 10px 0;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-bottom-color: #ff6b3d;
-            background: rgba(255, 107, 61, 0.02);
-        }
-
-        button[type="submit"] {
-            display: inline-block;
-            width: 100%;
-            margin-top: 20px;
-            padding: 18px 35px;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background-color: #ffffff;
-            color: #000000;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #e6e6e6;
-            transform: translateY(-2px);
-        }
-
-        /* =========================================
-           SIDEBAR / INFO SECTION
-        ========================================= */
-        .info-section {
-            background: #050505;
-            padding: 40px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .info-section h2 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .info-section ul {
-            list-style: none;
-        }
-
-        .info-section li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 20px;
-            color: #a0a0a0;
-            font-size: 0.95rem;
-        }
-
-        .info-section li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: #ff6b3d;
-        }
-
-        /* =========================================
-           FOOTER
-        ========================================= */
-        footer {
-            background: #050505;
-            color: #666;
-            text-align: center;
-            padding: 30px 20px;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: auto;
-        }
-
-        /* =========================================
-           RESPONSIVE DESIGN
-        ========================================= */
-        @media (max-width: 900px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                gap: 20px;
-                padding: 20px;
-            }
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .form-section, .info-section {
-                padding: 25px 15px;
-            }
-        }
-    </style>
+    <meta name="theme-color" content="#050505">
+    <title>Contact CINEVRA | Imagination in Action</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/contact.css">
 </head>
-<body>
-    <header>
-        <a href="../index.html" class="logo">CINEVRA</a>
-        <nav>
-            <ul>
+<body class="contact-page">
+    <header class="contact-header">
+        <a href="../index.html" class="logo-container" aria-label="CINEVRA Studios home"><img src="../assets/Cinevra26.10.2026.png" alt="CINEVRA Studios" class="site-logo"></a>
+        <nav aria-label="Main navigation">
+            <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="portfolio.html">Work</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="portfolio.html">Projects</a></li>
+                <li><a href="about.html">Tenebris</a></li>
+                <li><a href="contact.html" class="is-current" aria-current="page">Contact</a></li>
+                <li><a href="contact-ro.html" class="language-switch is-english" aria-label="Switch language to Romanian" title="Switch language to Romanian"><span class="language-option">RO</span><span class="language-option is-current">EN</span></a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <main class="contact-main">
         <h1 class="page-title">Let’s Work Together</h1>
         <p class="page-subtitle">Whether you are planning a commercial, documentary, or remote production, we would love to learn more about your vision. Tell us what you are building and we will help shape a thoughtful, efficient production approach.</p>
-        
+
         <div class="contact-grid">
-            <!-- Form Section -->
-            <section class="form-section">
+            <section class="form-section" aria-label="Contact form">
                 <form action="#" method="post">
-                    
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required placeholder="John Doe">
                     </div>
-
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required placeholder="hello@example.com">
                     </div>
-
                     <div class="form-group">
                         <label for="project-type">What type of project are you planning?</label>
                         <input type="text" id="project-type" name="project-type" placeholder="e.g. Commercial, Music Video, Documentary">
                     </div>
-
                     <div class="form-group">
                         <label for="budget">What is your estimated budget range?</label>
                         <input type="text" id="budget" name="budget" placeholder="e.g. $5,000 - $10,000">
                     </div>
-
                     <div class="form-group">
                         <label for="timeline">What is your target timeline?</label>
                         <input type="text" id="timeline" name="timeline" placeholder="e.g. Next month, Q3 2026">
                     </div>
-
                     <div class="form-group">
                         <label for="location">Where will the production take place?</label>
                         <input type="text" id="location" name="location" placeholder="e.g. Studio, On-location, Remote">
                     </div>
-
                     <div class="form-group">
                         <label for="message">Tell us more about your goals:</label>
                         <textarea id="message" name="message" required placeholder="Describe your vision and requirements..."></textarea>
                     </div>
-
-                    <button type="submit">Start the Conversation</button>
+                    <button class="btn btn-primary contact-submit" type="submit"><span class="button-label">Start the Conversation</span><span class="glow-particles" aria-hidden="true"></span></button>
                 </form>
             </section>
 
-            <!-- Info / Expectations Section -->
             <section class="info-section">
                 <h2>The Discovery Process</h2>
-                <p style="color: #a0a0a0; margin-bottom: 20px; font-size: 0.9rem;">To ensure we are the right fit for your vision, we use these key points to align our production capabilities with your goals:</p>
+                <p>To ensure we are the right fit for your vision, we use these key points to align our production capabilities with your goals:</p>
                 <ul>
                     <li><strong>Scope:</strong> Understanding the exact type of project and scale.</li>
                     <li><strong>Investment:</strong> Aligning on a target budget range to maximize on-screen value.</li>
@@ -326,8 +75,48 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 CINEVRA. Toate drepturile rezervate. | Imaginația în Acțiune.</p>
+    <footer class="site-footer">
+        <p class="footer-copyright">&copy; 2026 CINEVRA. All rights reserved.</p>
+        <div class="footer-grid">
+            <div class="footer-col brand-col">
+                <a href="../index.html" class="logo footer-logo">CINEVRA</a>
+                <p class="slogan">The art of being creative</p>
+                <div class="footer-legal">
+                    <a href="#">Terms &amp; Conditions</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Audio-Visual Production</a></li>
+                    <li><a href="#">Mobile Studio Hire</a></li>
+                    <li><a href="#">Cinematography</a></li>
+                    <li><a href="#">Post-Production</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Quicklinks</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html">Tenebris Team</a></li>
+                    <li><a href="portfolio.html">Our Portfolio</a></li>
+                    <li><a href="#">Equipment</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul class="footer-contact">
+                    <li>Bucharest, Romania</li>
+                    <li><a href="mailto:contact@cinevra.com">contact@cinevra.com</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">IN</a>
+                    <a href="#" class="social-icon">FB</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script src="../js/main.js"></script>
