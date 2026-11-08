@@ -11,8 +11,10 @@ media-team-website
 ├── src
 │   ├── index.html          # Main landing page
 │   ├── pages
-│   │   ├── portfolio.html  # Portfolio showcasing projects
-│   │   ├── about.html      # Information about the team
+│   │   ├── projects.html   # Projects showcase (English)
+│   │   ├── projects-ro.html
+│   │   ├── tenebris.html  # Tenebris artists (English)
+│   │   ├── tenebris-ro.html
 │   │   └── contact.html    # Contact form and details
 │   ├── css
 │   │   └── styles.css      # Styles for the website
@@ -26,8 +28,8 @@ media-team-website
 
 ## Features
 
-- **Portfolio Section**: Display of the media team's work and projects.
-- **About Section**: Information about the team, including mission and values.
+- **Projects Section**: Display of the media team's work and projects.
+- **Tenebris Artists**: Artist profiles, album information, and embedded album playback.
 - **Contact Section**: A form for users to get in touch with the team.
 - **Responsive Design**: The website is designed to be mobile-friendly and accessible.
 

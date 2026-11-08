@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const slides = [...artistSlider.querySelectorAll('[data-artist-slide]')];
             const recordStack = document.querySelector('[data-artist-records]');
             const albumDetails = document.querySelector('[data-current-album]');
+            const albumNextButton = document.querySelector('[data-album-next]');
             const selectedArtist = document.querySelector('[data-selected-artist]');
 
             const artists = [
@@ -18,48 +19,90 @@ document.addEventListener('DOMContentLoaded', function() {
                     name: 'Xeny',
                     image: '../assets/Artisti/XENY/Xeny1.jpeg',
                     albums: [
-                        { title: 'Glass Garden', year: '2025', tracks: [['Afterglow', '03:42'], ['Slow Motion', '02:58'], ['Paper Moons', '04:06']] },
-                        { title: 'Neon Veil', year: '2024', tracks: [['Velvet Static', '03:17'], ['Blue Hours', '03:51'], ['Quiet Fire', '02:46']] }
+                        {
+                            title: 'Altstar',
+                            year: 'EP',
+                            tracks: [
+                                ['Intro', '', 'A5rWPxmroO4'],
+                                ['Nopti la rand', '', 'l8YXOF53gTw'],
+                                ['Flori ft. Amon', '', 'GsbOJzByv2k'],
+                                ['Oglinda', '', 'sbH_dp9IDgw'],
+                                ['Mixed Feelings', '', 'JMN0LjLq4Lw'],
+                                ['Pleci ft. Adelisha', '', 'SNlC-D5N-bk']
+                            ]
+                        },
+                        {
+                            title: 'Singles',
+                            year: '2026',
+                            tracks: [
+                                ['Day Drinker', '', 'xmODZbCyUWI'],
+                                ['Toxici', '', 'bGT7dLrykdY'],
+                                ['Slo-mo', '', 'rmLTzC-1YE8'],
+                                ['Fine', '', 'W0GMlgkVdZI'],
+                                ['Alo', '', 'P5TtoLSlWks'],
+                                ['fvck that', '', 'fShDo9OkxHM']
+                            ]
+                        }
                     ]
                 },
                 {
                     name: '3fu',
                     image: '../assets/Artisti/3FU/3fu1.jpeg',
                     albums: [
-                        { title: 'Night Signals', year: '2025', tracks: [['No Reply', '02:49'], ['Streetlight', '03:21'], ['Low Battery', '02:37']] },
-                        { title: 'Concrete Dreams', year: '2024', tracks: [['Cold Start', '03:14'], ['Sideways', '02:56'], ['Last Train', '03:33']] }
+                        {
+                            title: 'Singles',
+                            year: '',
+                            tracks: [
+                                ['4 Dimineata', '', 'PfVNHEj9M1Q'],
+                                ['Alte petreceri', '', 'jBdpgLKsCqo'],
+                                ['Tabu', '', 'ETcujhQuaMc']
+                            ]
+                        }
                     ]
                 },
                 {
                     name: 'Veart',
                     image: '../assets/Artisti/VEART/Veart1.jpeg',
                     albums: [
-                        { title: 'Red Horizon', year: '2025', tracks: [['Open Roads', '03:26'], ['Northbound', '04:02'], ['Dust & Gold', '03:18']] },
-                        { title: 'Soft Focus', year: '2023', tracks: [['Almost There', '02:57'], ['Warm Lights', '03:40'], ['First Rain', '03:09']] }
+                        {
+                            title: 'Singles',
+                            year: '',
+                            tracks: [
+                                ['Nu vreau sa te vad', '', 'NsqYYCIKkn0'],
+                                ['Valuri', '', 'sx-ANJdbLYM'],
+                                ['Slo-mo', '', 'rmLTzC-1YE8'],
+                                ['Alo', '', 'P5TtoLSlWks'],
+                                ['Fvck that', '', 'fShDo9OkxHM']
+                            ]
+                        }
                     ]
                 },
                 {
                     name: 'Adelisha',
                     image: '../assets/Artisti/ADELISHA/Adelisha1.jpeg',
                     albums: [
-                        { title: 'Silver Lining', year: '2025', tracks: [['Satellite Heart', '03:38'], ['In Between', '03:04'], ['Stay a While', '04:13']] },
-                        { title: 'Soft Geometry', year: '2024', tracks: [['Half Awake', '02:53'], ['Make Believe', '03:31'], ['Slow Burn', '03:46']] }
+                        { title: 'Singles', year: '', tracks: [['Pleci', '', 'SNlC-D5N-bk']] }
                     ]
                 },
                 {
                     name: 'Ciucan',
                     image: '../assets/Artisti/CIUCAN/Ciucan1.jpeg',
                     albums: [
-                        { title: 'Silver Lining', year: '2025', tracks: [['Satellite Heart', '03:38'], ['In Between', '03:04'], ['Stay a While', '04:13']] },
-                        { title: 'Soft Geometry', year: '2024', tracks: [['Half Awake', '02:53'], ['Make Believe', '03:31'], ['Slow Burn', '03:46']] }
+                        {
+                            title: 'Singles',
+                            year: '',
+                            tracks: [
+                                ['Tabu', '', 'ETcujhQuaMc'],
+                                ['Terorista', '', 'n3x9rDurYNc']
+                            ]
+                        }
                     ]
                 },
                 {
                     name: 'Amon',
                     image: '../assets/Artisti/AMON/Amon1.jpeg',
                     albums: [
-                        { title: 'After the Echo', year: '2025', tracks: [['Small Hours', '03:27'], ['Fade Out', '03:56'], ['Nothing Personal', '02:59']] },
-                        { title: 'The Quiet Machine', year: '2023', tracks: [['Signal Loss', '03:10'], ['Runaway Season', '04:05'], ['Home Again', '03:22']] }
+                        { title: 'Singles', year: '', tracks: [['Flori', '', 'GsbOJzByv2k']] }
                     ]
                 }
             ];
@@ -116,6 +159,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentArtistIndex = 0;
         let currentPhysicalIndex = CLONE_COUNT; // Indexul pornește acum de la numărul de clone adăugate
         let currentAlbumIndex = 0;
+        let activeTrackPlayer = null;
+        let activeTrackButton = null;
         let wrapResetPending = false;
         let isArtistTransitioning = false;
         let artistTransitionTimer = 0;
@@ -137,9 +182,12 @@ document.addEventListener('DOMContentLoaded', function() {
             label.className = 'artist-record-label';
             const title = document.createElement('strong');
             title.textContent = album.title;
-            const year = document.createElement('small');
-            year.textContent = album.year;
-            label.append(title, year);
+            label.append(title);
+            if (album.year) {
+                const year = document.createElement('small');
+                year.textContent = album.year;
+                label.append(year);
+            }
             const hole = document.createElement('span');
             hole.className = 'artist-record-hole';
             record.append(image, label, hole);
@@ -148,17 +196,38 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         const renderAlbum = (artistIndex, albumIndex) => {
+            activeTrackPlayer?.remove();
+            if (activeTrackButton) activeTrackButton.hidden = false;
+            activeTrackPlayer = null;
+            activeTrackButton = null;
+
             const artist = artists[artistIndex];
+            if (!artist.albums.length) {
+                currentAlbumIndex = 0;
+                recordStack.replaceChildren();
+                albumNextButton.hidden = true;
+                albumDetails.closest('.artist-record-player').classList.add('has-no-releases');
+                const emptyMessage = document.createElement('p');
+                emptyMessage.className = 'artist-no-releases';
+                emptyMessage.textContent = document.documentElement.lang === 'ro'
+                    ? 'Nu sunt lansări disponibile momentan.'
+                    : 'No releases available yet.';
+                albumDetails.replaceChildren(emptyMessage);
+                return;
+            }
+
             currentAlbumIndex = (albumIndex + artist.albums.length) % artist.albums.length;
             const album = artist.albums[currentAlbumIndex];
             recordStack.replaceChildren(...artist.albums.map((item, index) => createAlbumRecord(item, artist, index, index === currentAlbumIndex)));
+            albumNextButton.hidden = artist.albums.length < 2;
+            albumDetails.closest('.artist-record-player').classList.remove('has-no-releases');
 
             const metadata = document.createElement('p');
             metadata.className = 'artist-album-meta';
             const artistName = document.createElement('span');
             artistName.textContent = artist.name;
             const year = document.createElement('span');
-            year.textContent = `${album.year} / SAMPLE`;
+            year.textContent = album.year;
             metadata.append(artistName, year);
 
             const title = document.createElement('h4');
@@ -166,10 +235,12 @@ document.addEventListener('DOMContentLoaded', function() {
             title.textContent = album.title;
             const trackHeading = document.createElement('p');
             trackHeading.className = 'artist-track-heading';
-            trackHeading.textContent = document.documentElement.lang === 'ro' ? 'Piese selectate' : 'Track listing';
+            const isRomanian = document.documentElement.lang === 'ro';
+            trackHeading.textContent = isRomanian ? 'Piese selectate' : 'Track listing';
+
             const trackList = document.createElement('ol');
             trackList.className = 'artist-track-list';
-            album.tracks.forEach(([trackName, duration], trackIndex) => {
+            album.tracks.forEach(([trackName, duration, videoId], trackIndex) => {
                 const row = document.createElement('li');
                 const number = document.createElement('span');
                 number.className = 'artist-track-number';
@@ -180,6 +251,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 length.className = 'artist-track-duration';
                 length.textContent = duration;
                 row.append(number, name, length);
+
+                if (videoId) {
+                    const playButton = document.createElement('button');
+                    playButton.className = 'artist-track-play';
+                    playButton.type = 'button';
+                    playButton.textContent = isRomanian ? 'Redă' : 'Play';
+                    playButton.setAttribute('aria-label', `${isRomanian ? 'Redă' : 'Play'} ${trackName}`);
+                    playButton.addEventListener('click', () => {
+                        activeTrackPlayer?.remove();
+                        if (activeTrackButton) activeTrackButton.hidden = false;
+
+                        const player = document.createElement('iframe');
+                        player.className = 'artist-track-player';
+                        player.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&playsinline=1`;
+                        player.title = `${artist.name} - ${trackName}`;
+                        player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                        player.referrerPolicy = 'strict-origin-when-cross-origin';
+                        player.allowFullscreen = true;
+                        playButton.after(player);
+                        playButton.hidden = true;
+                        activeTrackPlayer = player;
+                        activeTrackButton = playButton;
+                    });
+                    row.append(playButton);
+                }
+
                 trackList.append(row);
             });
             albumDetails.replaceChildren(metadata, title, trackHeading, trackList);
@@ -287,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
         artistSlider.querySelector('[data-artist-previous]').addEventListener('click', () => moveArtist(-1));
         artistSlider.querySelector('[data-artist-next]').addEventListener('click', () => moveArtist(1));
-        document.querySelector('[data-album-next]').addEventListener('click', () => {
+        albumNextButton.addEventListener('click', () => {
             renderAlbum(currentArtistIndex, currentAlbumIndex + 1);
         });
         artistSlider.addEventListener('keydown', event => {
@@ -304,22 +401,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const portfolioHeader = document.querySelector('.portfolio-header');
     const portfolioMenuButton = document.querySelector('[data-portfolio-menu-toggle]');
     const portfolioMenu = document.querySelector('[data-portfolio-menu]');
-    if (portfolioHeader && portfolioMenuButton && portfolioMenu) {
+    if (portfolioMenuButton && portfolioMenu) {
         let lastScrollY = window.scrollY;
         let navigationFrame = 0;
+        const menuOpenLabel = portfolioMenuButton.dataset.menuOpenLabel || 'Open menu';
+        const menuCloseLabel = portfolioMenuButton.dataset.menuCloseLabel || 'Close menu';
 
         const closePortfolioMenu = () => {
             portfolioMenu.classList.remove('active');
             portfolioMenuButton.classList.remove('menu-open');
             portfolioMenuButton.setAttribute('aria-expanded', 'false');
-            portfolioMenuButton.setAttribute('aria-label', 'Open menu');
+            portfolioMenuButton.setAttribute('aria-label', menuOpenLabel);
         };
 
         portfolioMenuButton.addEventListener('click', () => {
             const isOpen = portfolioMenu.classList.toggle('active');
             portfolioMenuButton.classList.toggle('menu-open', isOpen);
             portfolioMenuButton.setAttribute('aria-expanded', String(isOpen));
-            portfolioMenuButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+            portfolioMenuButton.setAttribute('aria-label', isOpen ? menuCloseLabel : menuOpenLabel);
         });
 
         portfolioMenu.querySelectorAll('a').forEach(link => {
@@ -335,15 +434,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const updatePortfolioNavigation = () => {
             const scrollY = window.scrollY;
             if (scrollY <= 32) {
-                portfolioHeader.classList.remove('is-hidden');
+                portfolioHeader?.classList.remove('is-hidden');
                 portfolioMenuButton.classList.remove('visible');
                 closePortfolioMenu();
             } else if (scrollY > lastScrollY + 2) {
-                portfolioHeader.classList.add('is-hidden');
+                portfolioHeader?.classList.add('is-hidden');
                 portfolioMenuButton.classList.add('visible');
             } else if (scrollY < lastScrollY - 2) {
-                portfolioHeader.classList.remove('is-hidden');
+                portfolioHeader?.classList.remove('is-hidden');
                 portfolioMenuButton.classList.remove('visible');
+                closePortfolioMenu();
             }
             lastScrollY = scrollY;
             navigationFrame = 0;

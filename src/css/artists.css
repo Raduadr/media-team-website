@@ -58,6 +58,7 @@
     width: max-content;
     align-items: center;
     gap: clamp(20px, 4vw, 60px);
+    perspective: 1400px;
     transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1); /* Animație mai fluidă de tip Spotify */
     will-change: transform;
 }
@@ -76,19 +77,38 @@
     cursor: pointer;
     opacity: 0.25;
     text-align: left;
-    transform: scale(0.85);
+    transform: perspective(1200px) scale(0.85) rotateY(-7deg);
+    transform-style: preserve-3d;
     transition: opacity 800ms ease, transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.artist-slide::before {
+    position: absolute;
+    z-index: -1;
+    inset: 9% 5%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(142, 0, 34, 0.75), rgba(112, 0, 22, 0.28) 42%, transparent 72%);
+    content: "";
+    filter: blur(30px);
+    opacity: 0.28;
+    transform: translateZ(-36px);
+    transition: opacity 800ms ease, transform 800ms ease;
+}
+
+.artist-slide.is-active::before {
+    opacity: 0.88;
+    transform: translateZ(-24px) scale(1.08);
 }
 
 /* Efectul de asimetrie premium alternantă */
 .artist-slide:nth-child(even) {
-    transform: scale(0.85) translateY(30px);
+    transform: perspective(1200px) scale(0.85) translateY(30px) rotateY(7deg);
 }
 
 /* Starea activă a slide-ului central */
 .artist-slide.is-active {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: perspective(1200px) scale(1) translateY(0) rotateY(0);
 }
 
 .artist-slide:nth-child(even).is-active {
@@ -104,12 +124,17 @@
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-    transition: border-color 600ms ease, box-shadow 600ms ease;
+    transform-style: preserve-3d;
+    transition: border-color 600ms ease, box-shadow 600ms ease, transform 600ms ease;
 }
 
 .artist-slide.is-active .artist-slide-image-wrapper {
     border-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(112, 0, 22, 0.25);
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.8),
+        0 0 24px rgba(169, 22, 52, 0.38),
+        0 0 64px rgba(112, 0, 22, 0.32);
+    transform: translateZ(24px);
 }
 
 .artist-slide-image-wrapper img {
@@ -302,6 +327,8 @@
 }
 
 .artist-record-player {
+    position: relative;
+    isolation: isolate;
     display: grid;
     grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.22fr);
     align-items: center;
@@ -312,6 +339,41 @@
     background:
         radial-gradient(ellipse at 15% 50%, rgba(112, 0, 22, 0.13), transparent 43%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.008));
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.5),
+        0 0 44px rgba(112, 0, 22, 0.18);
+    transform: perspective(1400px) rotateX(1deg);
+}
+
+.artist-record-player::before {
+    position: absolute;
+    z-index: -1;
+    inset: -28px;
+    border-radius: 8px;
+    background:
+        radial-gradient(ellipse at 24% 50%, rgba(169, 22, 52, 0.54), transparent 58%),
+        radial-gradient(ellipse at 78% 48%, rgba(112, 0, 22, 0.36), transparent 62%),
+        radial-gradient(ellipse at 52% 85%, rgba(112, 0, 22, 0.3), transparent 56%);
+    content: "";
+    filter: blur(34px);
+    opacity: 0.8;
+    pointer-events: none;
+    background-size: 145% 150%, 155% 145%, 135% 160%;
+    animation: album-lava-flow 14s ease-in-out infinite alternate;
+}
+
+.artist-record-player > * {
+    position: relative;
+    z-index: 1;
+}
+
+.artist-record-player.has-no-releases {
+    grid-template-columns: 1fr;
+    min-height: 0;
+}
+
+.artist-record-player.has-no-releases .artist-record-carousel {
+    display: none;
 }
 
 .artist-record-carousel {
@@ -481,13 +543,18 @@
     text-transform: uppercase;
 }
 
+.artist-no-releases {
+    color: #968e8d;
+    font-size: 0.9rem;
+}
+
 .artist-track-list {
     list-style: none;
 }
 
 .artist-track-list li {
     display: grid;
-    grid-template-columns: 30px minmax(0, 1fr) 44px;
+    grid-template-columns: 30px minmax(0, 1fr) 44px auto;
     align-items: center;
     gap: 10px;
     min-height: 46px;
@@ -505,6 +572,34 @@
 
 .artist-track-duration {
     text-align: right;
+}
+
+.artist-track-play {
+    min-width: 58px;
+    padding: 7px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.7rem;
+    transition: background 180ms ease, border-color 180ms ease;
+}
+
+.artist-track-play:hover,
+.artist-track-play:focus-visible {
+    border-color: #a91634;
+    background: #700016;
+}
+
+.artist-track-player {
+    grid-column: 1 / -1;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    background: #000;
 }
 
 .artist-contact {
@@ -565,6 +660,26 @@
     }
 }
 
+@keyframes album-lava-flow {
+    0% {
+        background-position: 0% 40%, 100% 55%, 50% 100%;
+        transform: scale(0.96);
+        filter: blur(34px) hue-rotate(-8deg);
+    }
+
+    50% {
+        background-position: 65% 5%, 25% 95%, 85% 20%;
+        transform: scale(1.04);
+        filter: blur(39px) hue-rotate(7deg);
+    }
+
+    100% {
+        background-position: 100% 70%, 0% 15%, 10% 80%;
+        transform: scale(0.99);
+        filter: blur(32px) hue-rotate(-3deg);
+    }
+}
+
 @media (max-width: 700px) {
     .tenebris-brand {
         align-self: center;
@@ -581,6 +696,10 @@
 
     .artist-slide {
         flex-basis: min(70vw, 300px);
+    }
+
+    .artist-slide::before {
+        filter: blur(22px);
     }
 
     .artist-arrow {
@@ -602,6 +721,12 @@
         grid-template-columns: 1fr;
         gap: 22px;
         padding: 26px 20px 30px;
+        transform: perspective(1000px) rotateX(0.5deg);
+    }
+
+    .artist-record-player::before {
+        inset: -16px;
+        filter: blur(24px);
     }
 
     .artist-record-carousel {
@@ -631,8 +756,10 @@
     .artist-slide img,
     .artist-arrow,
     .artist-record,
-    .artist-album-next {
+    .artist-album-next,
+    .artist-record-player::before {
         transition-duration: 0.01ms;
+        animation: none;
     }
 
     .artist-album-details {
