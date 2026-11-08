@@ -433,21 +433,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const updatePortfolioNavigation = () => {
             const scrollY = window.scrollY;
-            if (scrollY <= 32) {
+            
+            // REPARARE: Schimbăm pragul de verificare. 
+            // Cât timp suntem la începutul paginii (sub 100px), meniul clasic e vizibil, deci hamburgerul stă ascuns.
+            if (scrollY <= 100) {
                 portfolioHeader?.classList.remove('is-hidden');
                 portfolioMenuButton.classList.remove('visible');
                 closePortfolioMenu();
-            } else if (scrollY > lastScrollY + 2) {
+            } else {
+                // De îndată ce am trecut de 100px și coborâm pe site, hamburgerul RĂMÂNE vizibil mereu!
                 portfolioHeader?.classList.add('is-hidden');
                 portfolioMenuButton.classList.add('visible');
-            } else if (scrollY < lastScrollY - 2) {
-                portfolioHeader?.classList.remove('is-hidden');
-                portfolioMenuButton.classList.remove('visible');
-                closePortfolioMenu();
             }
+            
             lastScrollY = scrollY;
             navigationFrame = 0;
         };
+
 
         window.addEventListener('scroll', () => {
             if (!navigationFrame) {

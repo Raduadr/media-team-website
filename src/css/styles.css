@@ -1134,7 +1134,8 @@ footer {
     gap: 15px;
     margin-top: 20px;
     align-items: center;
-    padding-left: 7vh;
+    justify-content: center;
+    padding-left: 0;
 }
 
 .social-icon {
@@ -1912,5 +1913,138 @@ footer {
     .project-poster img,
     .project-play-icon {
         transition-duration: 0.01ms;
+    }
+}
+
+/* Unified navigation sizing for Home, Contact, and Projects. */
+.hero-nav,
+.contact-header,
+.portfolio-header {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 100px !important;
+    padding: 0 50px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: rgba(5, 5, 5, 0.9) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.hero-nav,
+.contact-header,
+.portfolio-header,
+.hero-nav .logo-container,
+.contact-header .logo-container,
+.portfolio-header .portfolio-logo {
+    display: flex !important;
+}
+
+.hero-nav .logo-container,
+.contact-header .logo-container,
+.portfolio-header .portfolio-logo {
+    height: 100% !important;
+    align-items: center !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+}
+
+.hero-nav .site-logo,
+.contact-header .site-logo,
+.portfolio-header .portfolio-logo img {
+    display: block !important;
+    width: auto !important;
+    height: 60px !important;
+}
+
+.hero-nav .nav-links,
+.contact-header nav ul,
+.portfolio-header .nav-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+@media (max-width: 768px) {
+    .hero-nav,
+    .contact-header,
+    .portfolio-header {
+        height: auto !important;
+        min-height: 125px !important;
+        padding: 15px !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 12px !important;
+    }
+
+    .hero-nav .logo-container,
+    .contact-header .logo-container,
+    .portfolio-header .portfolio-logo {
+        height: auto !important;
+        justify-content: center !important;
+    }
+
+    .hero-nav .site-logo,
+    .contact-header .site-logo,
+    .portfolio-header .portfolio-logo img {
+        height: 42px !important;
+    }
+
+    .hero-nav .nav-links,
+    .contact-header nav ul,
+    .portfolio-header .nav-links {
+        width: 100% !important;
+        justify-content: center !important;
+        gap: clamp(2px, 1vw, 4px) !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .hero-nav .nav-links a,
+    .contact-header nav ul a,
+    .portfolio-header .nav-links a {
+        padding: 6px clamp(4px, 1.5vw, 8px) !important;
+        font-size: clamp(0.65rem, 2.2vw, 0.75rem) !important;
+        letter-spacing: 0.02em !important;
+        white-space: nowrap !important;
+    }
+
+    .hero-nav .language-switch,
+    .contact-header .language-switch,
+    .portfolio-header .language-switch {
+        min-width: 76px !important;
+    }
+
+    .portfolio-library {
+        padding-top: 125px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-nav .nav-links,
+    .contact-header nav ul,
+    .portfolio-header .nav-links {
+        gap: 2px !important;
+    }
+
+    .hero-nav .nav-links a,
+    .contact-header nav ul a,
+    .portfolio-header .nav-links a {
+        padding: 5px 3px !important;
+        font-size: 0.56rem !important;
+    }
+
+    .hero-nav .language-switch,
+    .contact-header .language-switch,
+    .portfolio-header .language-switch {
+        min-width: 68px !important;
+    }
+
+    .portfolio-header .portfolio-logo {
+        display: flex !important;
     }
 }
