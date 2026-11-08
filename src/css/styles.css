@@ -1533,6 +1533,36 @@ footer {
     transform: scale(1.045);
 }
 
+.project-series-social-poster {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: clamp(20px, 4vw, 42px);
+    background:
+        radial-gradient(ellipse at 82% 18%, rgba(166, 38, 91, 0.52), transparent 38%),
+        radial-gradient(ellipse at 12% 90%, rgba(73, 21, 78, 0.6), transparent 48%),
+        linear-gradient(135deg, #17151c, #080808 68%);
+    text-align: left;
+}
+
+.project-series-social-poster span {
+    color: #d3cecb;
+    font-size: 0.64rem;
+    letter-spacing: 0.15em;
+}
+
+.project-series-social-poster strong {
+    max-width: 80%;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.5rem, 3.2vw, 3rem);
+    font-weight: 400;
+    line-height: 1.05;
+}
+
 .project-play-icon {
     position: absolute;
     z-index: 1;
@@ -1629,6 +1659,7 @@ footer {
 
 .project-series-caption {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     gap: 18px;
     margin-top: 18px;
@@ -1646,6 +1677,21 @@ footer {
     font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(1.15rem, 2.2vw, 1.8rem);
     font-weight: 400;
+}
+
+.project-series-watch-link {
+    flex-basis: 100%;
+    color: #d3cecb;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+}
+
+.project-series-watch-link:hover,
+.project-series-watch-link:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 .project-series-controls {

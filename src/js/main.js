@@ -564,7 +564,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 stopPlayback();
                 const iframe = document.createElement('iframe');
-                iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&playsinline=1`;
+                if (poster.dataset.videoPlatform === 'tiktok') {
+                    iframe.src = `https://www.tiktok.com/player/v1/${encodeURIComponent(videoId)}?autoplay=1`;
+                } else if (poster.dataset.videoPlatform === 'instagram') {
+                    iframe.src = `https://www.instagram.com/reel/${encodeURIComponent(videoId)}/embed/`;
+                } else {
+                    iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&playsinline=1`;
+                }
                 iframe.title = poster.dataset.videoTitle || 'CINEVRA series episode';
                 iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
                 iframe.referrerPolicy = 'strict-origin-when-cross-origin';
