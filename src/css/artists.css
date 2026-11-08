@@ -66,6 +66,7 @@
 /* Structura unui Slide individual */
 .artist-slide {
     position: relative;
+    isolation: isolate;
     display: block;
     flex: 0 0 clamp(260px, 32vw, 420px);
     aspect-ratio: 4 / 5;
@@ -78,26 +79,26 @@
     opacity: 0.25;
     text-align: left;
     transform: perspective(1200px) scale(0.85) rotateY(-7deg);
-    transform-style: preserve-3d;
+    transform-style: flat;
     transition: opacity 800ms ease, transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .artist-slide::before {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     inset: 9% 5%;
     border-radius: 50%;
     background: radial-gradient(ellipse, rgba(142, 0, 34, 0.75), rgba(112, 0, 22, 0.28) 42%, transparent 72%);
     content: "";
     filter: blur(30px);
     opacity: 0.28;
-    transform: translateZ(-36px);
+    transform: scale(0.96);
     transition: opacity 800ms ease, transform 800ms ease;
 }
 
 .artist-slide.is-active::before {
     opacity: 0.88;
-    transform: translateZ(-24px) scale(1.08);
+    transform: scale(1.08);
 }
 
 /* Efectul de asimetrie premium alternantă */
@@ -118,13 +119,13 @@
 /* Containerul Izolat al Imaginii */
 .artist-slide-image-wrapper {
     position: absolute;
+    z-index: 1;
     inset: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-    transform-style: preserve-3d;
     transition: border-color 600ms ease, box-shadow 600ms ease, transform 600ms ease;
 }
 
@@ -134,7 +135,7 @@
         0 30px 70px rgba(0, 0, 0, 0.8),
         0 0 24px rgba(169, 22, 52, 0.38),
         0 0 64px rgba(112, 0, 22, 0.32);
-    transform: translateZ(24px);
+    transform: none;
 }
 
 .artist-slide-image-wrapper img {
@@ -155,6 +156,7 @@
 
 .artist-slide-overlay {
     position: absolute;
+    z-index: 1;
     inset: 0;
     background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
 }
@@ -348,17 +350,17 @@
 .artist-record-player::before {
     position: absolute;
     z-index: -1;
-    inset: -28px;
+    inset: -18px;
     border-radius: 8px;
     background:
-        radial-gradient(ellipse at 24% 50%, rgba(169, 22, 52, 0.54), transparent 58%),
-        radial-gradient(ellipse at 78% 48%, rgba(112, 0, 22, 0.36), transparent 62%),
-        radial-gradient(ellipse at 52% 85%, rgba(112, 0, 22, 0.3), transparent 56%);
+        radial-gradient(ellipse 28% 42% at 24% 50%, rgba(86, 8, 27, 0.58), transparent 76%),
+        radial-gradient(ellipse 24% 38% at 78% 48%, rgba(55, 4, 19, 0.5), transparent 74%),
+        radial-gradient(ellipse 18% 30% at 52% 85%, rgba(75, 5, 23, 0.42), transparent 72%);
     content: "";
-    filter: blur(34px);
-    opacity: 0.8;
+    filter: blur(28px);
+    opacity: 0.86;
     pointer-events: none;
-    background-size: 145% 150%, 155% 145%, 135% 160%;
+    background-size: 112% 118%, 116% 112%, 108% 120%;
     animation: album-lava-flow 14s ease-in-out infinite alternate;
 }
 

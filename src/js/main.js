@@ -521,6 +521,64 @@ document.addEventListener('DOMContentLoaded', function() {
         updateProgress();
     }
 
+    const seriesSlideshow = document.querySelector('[data-series-slideshow]');
+    if (seriesSlideshow) {
+        const track = seriesSlideshow.querySelector('[data-series-track]');
+        const slides = [...seriesSlideshow.querySelectorAll('[data-series-slide]')];
+        const count = seriesSlideshow.querySelector('[data-series-count]');
+        const previousButton = seriesSlideshow.querySelector('[data-series-previous]');
+        const nextButton = seriesSlideshow.querySelector('[data-series-next]');
+        let currentSlide = 0;
+        let activePlayer;
+        let activePoster;
+
+        const stopPlayback = () => {
+            if (!activePlayer || !activePoster) return;
+            activePlayer.querySelector('iframe')?.remove();
+            activePlayer.append(activePoster);
+            activePlayer = undefined;
+            activePoster = undefined;
+        };
+
+        const showSlide = index => {
+            stopPlayback();
+            currentSlide = (index + slides.length) % slides.length;
+            if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            slides.forEach((slide, slideIndex) => {
+                const isCurrent = slideIndex === currentSlide;
+                slide.setAttribute('aria-hidden', String(!isCurrent));
+                slide.inert = !isCurrent;
+            });
+            if (count) {
+                count.textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+            }
+        };
+
+        previousButton?.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextButton?.addEventListener('click', () => showSlide(currentSlide + 1));
+        seriesSlideshow.querySelectorAll('[data-series-poster]').forEach(poster => {
+            poster.addEventListener('click', () => {
+                const player = poster.closest('.project-player');
+                const videoId = poster.dataset.videoId;
+                if (!player || !videoId) return;
+
+                stopPlayback();
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&playsinline=1`;
+                iframe.title = poster.dataset.videoTitle || 'CINEVRA series episode';
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+                iframe.allowFullscreen = true;
+
+                activePlayer = player;
+                activePoster = poster;
+                poster.replaceWith(iframe);
+            });
+        });
+
+        showSlide(0);
+    }
+
     document.querySelectorAll('.btn-primary').forEach(button => {
         const particleLayer = button.querySelector('.glow-particles');
         let pointerX = 0;

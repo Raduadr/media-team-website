@@ -970,25 +970,43 @@ footer {
 }
 
 .testimonial-slide {
+    display: flex;
+    min-height: 330px;
+    align-items: center;
     text-align: center;
-    opacity: 0.3;
-    transition: opacity 0.4s ease;
+    opacity: 0.48;
+    transform: scale(0.97);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .testimonial-slide.swiper-slide-active {
-    opacity: 1; /* Doar textul central activ este clar vizibil */
+    opacity: 1;
+    transform: scale(1);
+}
+
+.testimonial-card {
+    position: relative;
+    width: 100%;
+    padding: clamp(32px, 6vw, 68px);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    background:
+        radial-gradient(ellipse at 50% 0, rgba(112, 0, 22, 0.22), transparent 60%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012));
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38), inset 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .quote {
+    max-width: 720px;
+    margin: 0 auto 25px;
     font-size: clamp(1.2rem, 3vw, 1.7rem);
     font-weight: 300;
     line-height: 1.6;
     color: #e0e0e0;
-    margin-bottom: 25px;
     font-style: italic;
 }
 
 .author {
+    margin: 0;
     font-size: 0.9rem;
     font-weight: 700;
     color: #ffffff;
@@ -1567,6 +1585,98 @@ footer {
     letter-spacing: 0.15em;
 }
 
+.project-series {
+    display: grid;
+    grid-template-columns: minmax(210px, 0.72fr) minmax(0, 1.8fr);
+    align-items: center;
+    gap: clamp(28px, 6vw, 96px);
+    padding: clamp(58px, 8vw, 100px) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.project-series-heading h2 {
+    margin: 18px 0 14px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.1rem, 4vw, 4.2rem);
+    font-weight: 400;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+}
+
+.project-series-heading > p:last-child {
+    color: #a7a19e;
+    line-height: 1.7;
+}
+
+.project-series-player {
+    min-width: 0;
+}
+
+.project-series-viewport {
+    overflow: hidden;
+}
+
+.project-series-track {
+    display: flex;
+    transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    will-change: transform;
+}
+
+.project-series-slide {
+    flex: 0 0 100%;
+    min-width: 0;
+}
+
+.project-series-caption {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.project-series-caption span,
+.project-series-count {
+    color: #a7a19e;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+}
+
+.project-series-caption h3 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.15rem, 2.2vw, 1.8rem);
+    font-weight: 400;
+}
+
+.project-series-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.project-series-arrow {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.project-series-arrow:hover,
+.project-series-arrow:focus-visible {
+    border-color: var(--accent-color);
+    background: rgba(112, 0, 22, 0.45);
+    transform: scale(1.06);
+}
+
 .portfolio-end {
     display: flex;
     min-height: 70vh;
@@ -1694,6 +1804,18 @@ footer {
         text-align: left;
     }
 
+    .project-series {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 60px 0;
+    }
+
+    .project-series-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
     .project-index {
         margin-bottom: 26px;
     }
@@ -1733,11 +1855,14 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .testimonial-slide,
     .portfolio-scroll-line {
         animation: none;
     }
 
+    .testimonial-slide,
     .portfolio-project,
+    .project-series-track,
     .project-poster img,
     .project-play-icon {
         transition-duration: 0.01ms;
