@@ -21,6 +21,7 @@
             <ul class="nav-links">
                 <li><a href="#top" class="is-current" aria-current="page">Artists</a></li>
                 <li><a href="#albums">Albums</a></li>
+                <li><a href="#about-artist">About artist</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="tenebris-ro.html" class="language-switch is-english" aria-label="Switch language to Romanian" title="Switch language to Romanian"><span class="language-option">RO</span><span class="language-option is-current">EN</span></a></li>
             </ul>
@@ -30,8 +31,8 @@
         <section class="artist-showcase" id="top" aria-label="Featured artists">
             <div class="artist-slider visual-typography-slider" data-artist-slider role="region" aria-roledescription="carousel" aria-label="Featured artists">
                 <!-- Săgețile de navigare premium -->
-                <button class="artist-arrow artist-arrow-previous" type="button" data-artist-previous aria-label="Previous artist">←</button>
-                <button class="artist-arrow artist-arrow-next" type="button" data-artist-next aria-label="Next artist">→</button>
+                <button class="artist-arrow artist-arrow-previous" type="button" data-artist-previous aria-label="Previous artist"><span aria-hidden="true">‹</span></button>
+                <button class="artist-arrow artist-arrow-next" type="button" data-artist-next aria-label="Next artist"><span aria-hidden="true">›</span></button>
 
                 <div class="artist-slider-viewport" data-artist-viewport>
                     <div class="artist-slider-track" data-artist-track>
@@ -138,9 +139,22 @@
             <div class="artist-record-player">
                 <div class="artist-record-carousel" aria-label="Choose an album">
                     <div class="artist-record-stack" data-artist-records></div>
-                    <button class="artist-album-next" type="button" data-album-next aria-label="Next album">→</button>
+                    <button class="artist-album-next" type="button" data-album-next aria-label="Next album"><span aria-hidden="true">›</span></button>
                 </div>
                 <div class="artist-album-details" data-current-album aria-live="polite"></div>
+            </div>
+        </section>
+        <section class="artist-bio" id="about-artist" aria-label="About artist">
+            <div class="artist-bio-heading">
+                <p class="artist-eyebrow">ABOUT THE ARTIST</p>
+                <h2 data-artist-bio-name>Xeny</h2>
+            </div>
+            <div class="artist-bio-content">
+                <p class="artist-bio-description" data-artist-bio-description>Add an artist description.</p>
+                <div class="artist-specialties" data-artist-specialties aria-label="Artist skills and services"></div>
+                <div class="artist-social-links" data-artist-socials aria-label="Artist social profiles">
+                    <span class="artist-social-placeholder">Social links</span>
+                </div>
             </div>
         </section>
         <hr class="full-width-divider">

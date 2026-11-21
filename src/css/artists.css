@@ -252,7 +252,19 @@
     cursor: pointer;
     font-size: 1.3rem;
     backdrop-filter: blur(8px);
+    overflow: hidden;
+    line-height: 1;
     transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.artist-arrow span,
+.artist-album-next span {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1;
+    transform: translateY(-0.06em);
 }
 
 .artist-arrow:hover {
@@ -501,6 +513,8 @@
     color: #fff;
     cursor: pointer;
     font-size: 1.2rem;
+    line-height: 1;
+    overflow: hidden;
     transform: translateY(-50%);
     transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
@@ -512,6 +526,96 @@
 .artist-album-details {
     min-width: 0;
     animation: artist-album-enter 400ms ease both;
+}
+
+.artist-bio {
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(32px, 8vw, 100px);
+    padding: clamp(64px, 9vw, 110px) 0;
+}
+
+.artist-bio-heading h2 {
+    margin: 12px 0 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 400;
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+}
+
+.artist-bio-description {
+    max-width: 680px;
+    margin: 0;
+    color: #b5afac;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.75;
+}
+
+.artist-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.artist-specialty {
+    display: inline-flex;
+    min-height: 38px;
+    align-items: center;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255,255,255,.07), transparent 38%), rgba(10,10,12,.72);
+    color: #ded9d7;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.artist-social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.artist-social-link,
+.artist-social-placeholder {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(10, 10, 12, 0.72);
+    color: #fff;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.artist-social-link svg {
+    width: 17px;
+    height: 17px;
+}
+
+.artist-social-link:not([aria-disabled="true"]):hover {
+    border-color: rgba(255, 205, 218, 0.32);
+    background: rgba(112, 0, 22, 0.82);
+}
+
+.artist-social-link[aria-disabled="true"] {
+    color: #77716f;
+    cursor: default;
+}
+
+.artist-social-placeholder {
+    color: #77716f;
 }
 
 .artist-album-meta {
@@ -749,6 +853,12 @@
 
     .artist-contact {
         min-height: 360px;
+    }
+
+    .artist-bio {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 64px 0;
     }
 }
 

@@ -13,11 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const albumDetails = document.querySelector('[data-current-album]');
             const albumNextButton = document.querySelector('[data-album-next]');
             const selectedArtist = document.querySelector('[data-selected-artist]');
+            const bioName = document.querySelector('[data-artist-bio-name]');
+            const bioDescription = document.querySelector('[data-artist-bio-description]');
+            const bioSpecialties = document.querySelector('[data-artist-specialties]');
+            const bioSocials = document.querySelector('[data-artist-socials]');
 
             const artists = [
                 {
                     name: 'Xeny',
                     image: '../assets/Artisti/XENY/Xeny1.jpeg',
+                    description: '',
+                    specialties: [],
+                    socials: { instagram: '', tiktok: '', facebook: '' },
                     albums: [
                         {
                             title: 'Altstar',
@@ -48,6 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name: '3fu',
                     image: '../assets/Artisti/3FU/3fu1.jpeg',
+                    description: '',
+                    specialties: [],
+                    socials: { instagram: '', tiktok: '', facebook: '' },
                     albums: [
                         {
                             title: 'Singles',
@@ -63,6 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name: 'Veart',
                     image: '../assets/Artisti/VEART/Veart1.jpeg',
+                    description: '',
+                    specialties: [],
+                    socials: { instagram: '', tiktok: '', facebook: '' },
                     albums: [
                         {
                             title: 'Singles',
@@ -80,6 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name: 'Adelisha',
                     image: '../assets/Artisti/ADELISHA/Adelisha1.jpeg',
+                    description: '',
+                    specialties: [],
+                    socials: { instagram: '', tiktok: '', facebook: '' },
                     albums: [
                         { title: 'Singles', year: '', tracks: [['Pleci', '', 'SNlC-D5N-bk']] }
                     ]
@@ -87,6 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name: 'Ciucan',
                     image: '../assets/Artisti/CIUCAN/Ciucan1.jpeg',
+                    description: '',
+                    specialties: [],
+                    socials: { instagram: '', tiktok: '', facebook: '' },
                     albums: [
                         {
                             title: 'Singles',
@@ -101,6 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name: 'Amon',
                     image: '../assets/Artisti/AMON/Amon1.jpeg',
+                    description: '',
+                    specialties: [],
+                    socials: { instagram: '', tiktok: '', facebook: '' },
                     albums: [
                         { title: 'Singles', year: '', tracks: [['Flori', '', 'GsbOJzByv2k']] }
                     ]
@@ -193,6 +215,53 @@ document.addEventListener('DOMContentLoaded', function() {
             record.append(image, label, hole);
             record.addEventListener('click', () => renderAlbum(currentArtistIndex, index));
             return record;
+        };
+
+        const renderArtistProfile = artist => {
+            if (!bioName || !bioDescription || !bioSpecialties || !bioSocials) return;
+            const isRomanian = document.documentElement.lang === 'ro';
+            bioName.textContent = artist.name;
+            bioDescription.textContent = artist.description
+                || (isRomanian ? 'Adaugă descrierea artistului.' : 'Add an artist description.');
+
+            bioSpecialties.replaceChildren();
+            if (artist.specialties.length) {
+                artist.specialties.forEach(specialty => {
+                    const tag = document.createElement('span');
+                    tag.className = 'artist-specialty';
+                    tag.textContent = specialty;
+                    bioSpecialties.append(tag);
+                });
+            } else {
+                const placeholder = document.createElement('span');
+                placeholder.className = 'artist-specialty';
+                placeholder.textContent = isRomanian ? 'Adaugă specializări' : 'Add services';
+                bioSpecialties.append(placeholder);
+            }
+
+            const platformIcons = {
+                instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg>',
+                tiktok: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.7 5.1c.7 1.8 2.1 3.2 4 3.9v3.2a8.7 8.7 0 0 1-4-1.1v5.2a5.8 5.8 0 1 1-5-5.7v3.2a2.7 2.7 0 1 0 1.8 2.5V3h3.2c0 .7.2 1.4.4 2.1Z"/></svg>',
+                facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path fill="#09090b" d="M13.5 20v-7h2.3l.4-2.7h-2.7V8.6c0-.8.3-1.4 1.4-1.4h1.5V4.8c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v1.8H8.2V13h2.3v7h2.9Z"/></svg>'
+            };
+            bioSocials.replaceChildren();
+            Object.entries(artist.socials).forEach(([platform, url]) => {
+                const link = document.createElement('a');
+                link.className = 'artist-social-link';
+                link.innerHTML = `${platformIcons[platform]}<span>${platform}</span>`;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                if (url) {
+                    link.href = url;
+                    link.setAttribute('aria-label', `${artist.name} on ${platform}`);
+                } else {
+                    link.href = '#';
+                    link.setAttribute('aria-disabled', 'true');
+                    link.setAttribute('aria-label', `${platform} link not set`);
+                    link.addEventListener('click', event => event.preventDefault());
+                }
+                bioSocials.append(link);
+            });
         };
 
         const renderAlbum = (artistIndex, albumIndex) => {
@@ -303,6 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
             currentArtistIndex = nextIndex;
             selectedArtist.textContent = artist.name;
             renderAlbum(nextIndex, 0);
+            renderArtistProfile(artist);
             currentPhysicalIndex = physicalIndex;
             centerSlide(physicalIndex, animate);
             artistSlider.dataset.activeIndex = String(nextIndex);
