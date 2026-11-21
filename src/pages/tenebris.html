@@ -9,22 +9,25 @@
 </head>
 <body class="about-page">
     <header>
-        <a class="tenebris-brand" href="../index.html" aria-label="CINEVRA Studios home">
-            <img class="tenebris-logo" src="../assets/tenebris-logo.png" alt="">
-            <span>Tenebris</span>
-        </a>
+        <div class="brand-switch tenebris-brand-switch" aria-label="Choose website">
+            <a class="brand-switch-link brand-switch-cinevra" href="../index.html" aria-label="Open CINEVRA">
+                <img src="../assets/Cinevra26.10.2026.png" alt="CINEVRA Studios">
+            </a>
+            <a class="brand-switch-link is-active" href="tenebris.html" aria-current="page" aria-label="Tenebris">
+                <img src="../assets/tenebris-logo.png" alt="Tenebris">
+            </a>
+        </div>
         <nav aria-label="Main navigation">
             <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="tenebris.html" class="is-current" aria-current="page">Tenebris</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#top" class="is-current" aria-current="page">Artists</a></li>
+                <li><a href="#albums">Albums</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="tenebris-ro.html" class="language-switch is-english" aria-label="Switch language to Romanian" title="Switch language to Romanian"><span class="language-option">RO</span><span class="language-option is-current">EN</span></a></li>
             </ul>
         </nav>
     </header>
     <main class="artist-page">
-        <section class="artist-showcase" aria-label="Featured artists">
+        <section class="artist-showcase" id="top" aria-label="Featured artists">
             <div class="artist-slider visual-typography-slider" data-artist-slider role="region" aria-roledescription="carousel" aria-label="Featured artists">
                 <!-- Săgețile de navigare premium -->
                 <button class="artist-arrow artist-arrow-previous" type="button" data-artist-previous aria-label="Previous artist">←</button>
@@ -129,7 +132,7 @@
 
         </section>
 
-        <section class="artist-discography" aria-label="Artist albums">
+        <section class="artist-discography" id="albums" aria-label="Artist albums">
             <h2 class="artist-selected-name" data-selected-artist aria-live="polite">Xeny</h2>
             <p class="artist-placeholder-note">More to come.</p>
             <div class="artist-record-player">
@@ -200,10 +203,13 @@
     </button>
     <div id="site-menu" class="mobile-menu-overlay portfolio-menu-overlay" data-portfolio-menu>
         <nav class="mobile-nav-links" aria-label="Floating navigation">
-            <a href="../index.html" class="mobile-link">Home</a>
-            <a href="projects.html" class="mobile-link">Projects</a>
-            <a href="tenebris.html" class="mobile-link is-current" aria-current="page">Tenebris</a>
-            <a href="contact.html" class="mobile-link">Contact</a>
+            <div class="mobile-brand-switch tenebris-brand-switch" aria-label="Choose website">
+                <a href="../index.html" class="brand-switch-link brand-switch-cinevra" aria-label="Open CINEVRA"><img src="../assets/Cinevra26.10.2026.png" alt="CINEVRA Studios"></a>
+                <a href="tenebris.html" class="brand-switch-link is-active" aria-current="page" aria-label="Tenebris"><img src="../assets/tenebris-logo.png" alt="Tenebris"></a>
+            </div>
+            <a href="#top" class="mobile-link is-current" aria-current="page">Artists</a>
+            <a href="#albums" class="mobile-link">Albums</a>
+            <a href="#contact" class="mobile-link">Contact</a>
             <a href="tenebris-ro.html" class="language-switch is-english mobile-link-lang" aria-label="Switch language to Romanian" title="Switch language to Romanian"><span class="language-option">RO</span><span class="language-option is-current">EN</span></a>
         </nav>
     </div>

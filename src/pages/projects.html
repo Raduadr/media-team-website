@@ -9,14 +9,19 @@
 </head>
 <body id="top" class="portfolio-page">
     <header class="portfolio-header">
-        <a class="portfolio-logo" href="../index.html" aria-label="CINEVRA Studios home">
-            <img src="../assets/Cinevra26.10.2026.png" alt="CINEVRA Studios">
-        </a>
+        <div class="brand-switch" aria-label="Choose website">
+            <a class="brand-switch-link is-active" href="../index.html" aria-current="page" aria-label="CINEVRA Studios">
+                <img src="../assets/Cinevra26.10.2026.png" alt="CINEVRA Studios" class="portfolio-logo-image">
+            </a>
+            <a class="brand-switch-link brand-switch-tenebris" href="tenebris.html" aria-label="Open Tenebris">
+                <img src="../assets/tenebris-logo.png" alt="Tenebris">
+            </a>
+        </div>
         <nav aria-label="Main navigation">
             <ul class="nav-links portfolio-nav">
                 <li><a href="../index.html">Home</a></li>
                 <li><a class="is-current" href="projects.html" aria-current="page">Projects</a></li>
-                <li><a href="tenebris.html">Tenebris</a></li>
+                <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="projects-ro.html" class="language-switch is-english" aria-label="Switch language to Romanian" title="Switch language to Romanian"><span class="language-option">RO</span><span class="language-option is-current">EN</span></a></li>
             </ul>
@@ -34,8 +39,18 @@
             </a>
         </section>
 
+        <div class="project-category-slot">
+            <nav class="project-category-bar" data-project-category-bar aria-label="Filter projects">
+                <button type="button" class="project-category-button is-active" data-project-category="all" aria-pressed="true">All Projects</button>
+                <button type="button" class="project-category-button" data-project-category="music-video" aria-pressed="false">Music Videos</button>
+                <button type="button" class="project-category-button" data-project-category="reel" aria-pressed="false">Reels</button>
+                <button type="button" class="project-category-button" data-project-category="short-film" aria-pressed="false">Short Films</button>
+                <button type="button" class="project-category-button" data-project-category="commercial" aria-pressed="false">Commercials</button>
+            </nav>
+        </div>
+
         <section class="portfolio-projects" aria-label="Project video library">
-            <article class="portfolio-project" id="project-01" data-project>
+            <article class="portfolio-project" id="project-01" data-project data-category="music-video">
                 <div class="project-meta">
                     <p class="project-index">01 <span>/ 04</span></p>
                     <p class="project-type">Official music video</p>
@@ -54,7 +69,7 @@
                 </div>
             </article>
 
-            <article class="portfolio-project portfolio-project-reverse" id="project-02" data-project>
+            <article class="portfolio-project portfolio-project-reverse" id="project-02" data-project data-category="music-video">
                 <div class="project-meta">
                     <p class="project-index">02 <span>/ 04</span></p>
                     <p class="project-type">Official music video</p>
@@ -73,7 +88,7 @@
                 </div>
             </article>
 
-            <section class="project-series" data-series-slideshow aria-labelledby="project-series-title">
+            <section class="project-series" data-series-slideshow data-category="reel" aria-labelledby="project-series-title">
                 <div class="project-series-heading">
                     <p class="portfolio-kicker">CINEVRA / ORIGINAL SERIES</p>
                     <h2 id="project-series-title">În floarea vârstei</h2>
@@ -182,7 +197,7 @@
                 </div>
             </section>
 
-            <article class="portfolio-project" id="project-03" data-project>
+            <article class="portfolio-project" id="project-03" data-project data-category="music-video">
                 <div class="project-meta">
                     <p class="project-index">03 <span>/ 04</span></p>
                     <p class="project-type">Official music video</p>
@@ -201,7 +216,7 @@
                 </div>
             </article>
 
-            <article class="portfolio-project portfolio-project-reverse" id="project-04" data-project>
+            <article class="portfolio-project portfolio-project-reverse" id="project-04" data-project data-category="music-video">
                 <div class="project-meta">
                     <p class="project-index">04 <span>/ 04</span></p>
                     <p class="project-type">Official visual</p>
@@ -251,7 +266,7 @@
             <div class="footer-col">
                 <h3>Quicklinks</h3>
                 <ul class="footer-links">
-                    <li><a href="tenebris.html">Tenebris Team</a></li>
+                    <li><a href="about.html">About Us</a></li>
                     <li><a href="projects.html">Our Portfolio</a></li>
                     <li><a href="#">Equipment</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -278,9 +293,13 @@
     </button>
     <div id="portfolio-menu" class="mobile-menu-overlay portfolio-menu-overlay" data-portfolio-menu>
         <nav class="mobile-nav-links" aria-label="Floating navigation">
+            <div class="mobile-brand-switch" aria-label="Choose website">
+                <a href="../index.html" class="brand-switch-link is-active" aria-label="CINEVRA Studios"><img src="../assets/Cinevra26.10.2026.png" alt="CINEVRA Studios"></a>
+                <a href="tenebris.html" class="brand-switch-link brand-switch-tenebris" aria-label="Open Tenebris"><img src="../assets/tenebris-logo.png" alt="Tenebris"></a>
+            </div>
             <a href="../index.html" class="mobile-link">Home</a>
             <a href="projects.html" class="mobile-link is-current" aria-current="page">Projects</a>
-            <a href="tenebris.html" class="mobile-link">Tenebris</a>
+            <a href="about.html" class="mobile-link">About Us</a>
             <a href="contact.html" class="mobile-link">Contact</a>
             <a href="projects-ro.html" class="language-switch is-english mobile-link-lang" aria-label="Switch language to Romanian" title="Switch language to Romanian">
                 <span class="language-option">RO</span>

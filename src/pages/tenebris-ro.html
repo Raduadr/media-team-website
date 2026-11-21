@@ -9,22 +9,25 @@
 </head>
 <body class="about-page">
     <header>
-        <a class="tenebris-brand" href="../index-ro.html" aria-label="CINEVRA Studios - acasă">
-            <img class="tenebris-logo" src="../assets/tenebris-logo.png" alt="">
-            <span>Tenebris</span>
-        </a>
+        <div class="brand-switch tenebris-brand-switch" aria-label="Alege site-ul">
+            <a class="brand-switch-link brand-switch-cinevra" href="../index-ro.html" aria-label="Deschide CINEVRA">
+                <img src="../assets/Cinevra26.10.2026.png" alt="CINEVRA Studios">
+            </a>
+            <a class="brand-switch-link is-active" href="tenebris-ro.html" aria-current="page" aria-label="Tenebris">
+                <img src="../assets/tenebris-logo.png" alt="Tenebris">
+            </a>
+        </div>
         <nav aria-label="Navigare principală">
             <ul class="nav-links">
-                <li><a href="../index-ro.html">Acasă</a></li>
-                <li><a href="projects-ro.html">Proiecte</a></li>
-                <li><a href="tenebris-ro.html" class="is-current" aria-current="page">Tenebris</a></li>
-                <li><a href="contact-ro.html">Contact</a></li>
+                <li><a href="#top" class="is-current" aria-current="page">Artiști</a></li>
+                <li><a href="#albums">Albume</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="tenebris.html" class="language-switch" aria-label="Schimbă limba în engleză" title="Schimbă limba în engleză"><span class="language-option is-current">RO</span><span class="language-option">EN</span></a></li>
             </ul>
         </nav>
     </header>
     <main class="artist-page">
-        <section class="artist-showcase" aria-label="Artiști prezentați">
+        <section class="artist-showcase" id="top" aria-label="Artiști prezentați">
             <div class="artist-slider visual-typography-slider" data-artist-slider role="region" aria-roledescription="carousel" aria-label="Featured artists">
                 <!-- Săgețile de navigare premium -->
                 <button class="artist-arrow artist-arrow-previous" type="button" data-artist-previous aria-label="Previous artist">←</button>
@@ -129,7 +132,7 @@
 
         </section>
 
-        <section class="artist-discography" aria-label="Albumele artistului">
+        <section class="artist-discography" id="albums" aria-label="Albumele artistului">
             <h2 class="artist-selected-name" data-selected-artist aria-live="polite">Xeny</h2>
             <p class="artist-placeholder-note">More to come.</p>
             <div class="artist-record-player">
@@ -200,10 +203,13 @@
     </button>
     <div id="site-menu" class="mobile-menu-overlay portfolio-menu-overlay" data-portfolio-menu>
         <nav class="mobile-nav-links" aria-label="Navigare plutitoare">
-            <a href="../index-ro.html" class="mobile-link">Acasă</a>
-            <a href="projects-ro.html" class="mobile-link">Proiecte</a>
-            <a href="tenebris-ro.html" class="mobile-link is-current" aria-current="page">Tenebris</a>
-            <a href="contact-ro.html" class="mobile-link">Contact</a>
+            <div class="mobile-brand-switch tenebris-brand-switch" aria-label="Alege site-ul">
+                <a href="../index-ro.html" class="brand-switch-link brand-switch-cinevra" aria-label="Deschide CINEVRA"><img src="../assets/Cinevra26.10.2026.png" alt="CINEVRA Studios"></a>
+                <a href="tenebris-ro.html" class="brand-switch-link is-active" aria-current="page" aria-label="Tenebris"><img src="../assets/tenebris-logo.png" alt="Tenebris"></a>
+            </div>
+            <a href="#top" class="mobile-link is-current" aria-current="page">Artiști</a>
+            <a href="#albums" class="mobile-link">Albume</a>
+            <a href="#contact" class="mobile-link">Contact</a>
             <a href="tenebris.html" class="language-switch mobile-link-lang" aria-label="Schimbă limba în engleză" title="Schimbă limba în engleză"><span class="language-option is-current">RO</span><span class="language-option">EN</span></a>
         </nav>
     </div>

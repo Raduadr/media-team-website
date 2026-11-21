@@ -587,6 +587,48 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(0);
     }
 
+    const projectCategoryBar = document.querySelector('[data-project-category-bar]');
+    if (projectCategoryBar) {
+        const categorySlot = projectCategoryBar.closest('.project-category-slot');
+        const filterItems = [...document.querySelectorAll('.portfolio-project[data-category], .project-series[data-category]')];
+        const categoryButtons = [...projectCategoryBar.querySelectorAll('[data-project-category]')];
+
+        const updateCategoryBar = () => {
+            if (categorySlot) {
+                categorySlot.style.height = `${projectCategoryBar.offsetHeight}px`;
+                projectCategoryBar.classList.toggle('is-fixed', categorySlot.getBoundingClientRect().top <= 0);
+            }
+        };
+
+        const applyProjectCategory = category => {
+            filterItems.forEach(item => {
+                const isVisible = category === 'all' || item.dataset.category === category;
+                item.hidden = !isVisible;
+            });
+            categoryButtons.forEach(button => {
+                const isActive = button.dataset.projectCategory === category;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-pressed', String(isActive));
+            });
+        };
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => applyProjectCategory(button.dataset.projectCategory));
+        });
+
+        let categoryBarFrame = 0;
+        const scheduleCategoryBarUpdate = () => {
+            if (categoryBarFrame) return;
+            categoryBarFrame = window.requestAnimationFrame(() => {
+                updateCategoryBar();
+                categoryBarFrame = 0;
+            });
+        };
+        window.addEventListener('scroll', scheduleCategoryBarUpdate, { passive: true });
+        window.addEventListener('resize', scheduleCategoryBarUpdate, { passive: true });
+        updateCategoryBar();
+    }
+
     document.querySelectorAll('.btn-primary').forEach(button => {
         const particleLayer = button.querySelector('.glow-particles');
         let pointerX = 0;

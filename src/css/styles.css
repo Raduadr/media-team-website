@@ -2048,3 +2048,258 @@ footer {
         display: flex !important;
     }
 }
+
+.brand-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brand-switch-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 220ms ease, filter 220ms ease, transform 220ms ease;
+}
+
+.brand-switch-link.is-active {
+    opacity: 1;
+    filter: none;
+}
+
+.brand-switch-cinevra,
+.brand-switch-tenebris {
+    opacity: 0.58;
+    filter: grayscale(0.45) brightness(0.72);
+}
+
+.brand-switch-cinevra:hover,
+.brand-switch-tenebris:hover,
+.brand-switch-cinevra:focus-visible,
+.brand-switch-tenebris:focus-visible {
+    opacity: 1;
+    filter: none;
+    transform: scale(1.04);
+}
+
+.brand-switch-link img {
+    display: block;
+    width: auto;
+    height: 60px;
+}
+
+.brand-switch-tenebris img,
+.brand-switch-cinevra img {
+    height: 42px;
+}
+
+.tenebris-brand-switch .brand-switch-link.is-active img {
+    height: 48px;
+    opacity: 1;
+    filter: none;
+}
+
+.mobile-brand-switch {
+    display: flex;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.mobile-brand-switch .brand-switch-link img {
+    height: 58px;
+}
+
+.mobile-brand-switch .brand-switch-tenebris img {
+    height: 42px;
+}
+
+.mobile-brand-switch.tenebris-brand-switch .brand-switch-link.is-active img {
+    height: 48px;
+}
+
+.mobile-brand-switch.tenebris-brand-switch .brand-switch-cinevra img {
+    height: 36px;
+}
+
+.project-category-bar {
+    position: sticky;
+    z-index: 40;
+    top: 0;
+    display: flex;
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 12px;
+    gap: 8px;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(8, 8, 8, 0.92);
+    backdrop-filter: blur(16px);
+    scrollbar-width: none;
+}
+
+.project-category-slot {
+    position: relative;
+}
+
+.project-category-bar.is-fixed {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+}
+
+.project-category-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.project-category-button {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
+    color: #cfcac7;
+    cursor: pointer;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: 180ms ease;
+}
+
+.project-category-button:hover,
+.project-category-button:focus-visible,
+.project-category-button.is-active {
+    border-color: rgba(169, 22, 52, 0.8);
+    background: #700016;
+    color: #fff;
+}
+
+.portfolio-project[hidden],
+.project-series[hidden] {
+    display: none !important;
+}
+
+.about-us-page {
+    background: #080808;
+}
+
+.about-us-main {
+    min-height: calc(100dvh - 100px);
+    padding: clamp(80px, 10vw, 140px) clamp(22px, 8vw, 130px);
+}
+
+.about-us-intro {
+    max-width: 920px;
+}
+
+.about-us-kicker {
+    color: #aaa5a2;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+}
+
+.about-us-intro h1 {
+    margin: 20px 0 28px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 400;
+    letter-spacing: -0.06em;
+    line-height: 0.92;
+}
+
+.about-us-intro h1 span {
+    color: #aaa5a2;
+    font-style: italic;
+}
+
+.about-us-intro > p:last-child {
+    max-width: 620px;
+    color: #bdb8b5;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.about-us-team {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 80px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.team-profile {
+    min-height: 220px;
+    padding: 28px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.team-profile:last-child {
+    border-right: 0;
+}
+
+.team-profile span {
+    color: #777270;
+    font-size: 0.68rem;
+}
+
+.team-profile h2 {
+    margin: 48px 0 12px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 400;
+}
+
+.team-profile p {
+    color: #aaa5a2;
+}
+
+@media (max-width: 768px) {
+    .brand-switch-link img,
+    .brand-switch-cinevra img,
+    .brand-switch-tenebris img,
+    .portfolio-logo-image {
+        height: 34px !important;
+    }
+
+    .project-category-bar {
+        width: calc(100% - 28px);
+        margin: 0 auto;
+        border-radius: 16px;
+    }
+
+    .project-category-bar.is-fixed {
+        top: 0;
+        left: 50%;
+        margin: 0;
+    }
+
+    .mobile-brand-switch .brand-switch-link img {
+        height: 48px;
+    }
+
+    .mobile-brand-switch .brand-switch-tenebris img {
+        height: 36px;
+    }
+
+    .mobile-brand-switch.tenebris-brand-switch .brand-switch-link.is-active img {
+        height: 40px;
+    }
+
+    .mobile-brand-switch.tenebris-brand-switch .brand-switch-cinevra img {
+        height: 30px;
+    }
+
+    .about-us-team {
+        grid-template-columns: 1fr;
+    }
+
+    .team-profile {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+}
