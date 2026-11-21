@@ -22,9 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name: 'Xeny',
                     image: '../assets/Artisti/XENY/Xeny1.jpeg',
-                    description: '',
+                    description: 'Xeny nu face nimic!',
                     specialties: [],
-                    socials: { instagram: '', tiktok: '', facebook: '' },
+                    socials: {
+                        instagram: 'https://www.instagram.com/xeny_off/',
+                        tiktok: 'https://www.tiktok.com/@xenyoff?lang=en-GB',
+                        spotify: 'https://open.spotify.com/artist/5aKnDAlxu238rC0X0HXyJh?si=cVCArJfZT72_uOy5Ebm3fA'
+                    },
                     albums: [
                         {
                             title: 'Altstar',
@@ -57,7 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     image: '../assets/Artisti/3FU/3fu1.jpeg',
                     description: '',
                     specialties: [],
-                    socials: { instagram: '', tiktok: '', facebook: '' },
+                    socials: {
+                        instagram: 'https://www.instagram.com/trifudrs/',
+                        tiktok: 'https://www.tiktok.com/@3fulikesthis1?lang=en-GB',
+                        spotify: 'https://open.spotify.com/artist/1WuDOVSqJs491yCX08eak3?si=3agVKxg1QEKgQQFrajmL2A'
+                    },
                     albums: [
                         {
                             title: 'Singles',
@@ -75,7 +83,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     image: '../assets/Artisti/VEART/Veart1.jpeg',
                     description: '',
                     specialties: [],
-                    socials: { instagram: '', tiktok: '', facebook: '' },
+                    socials: {
+                        instagram: 'https://www.instagram.com/victor.vfg/',
+                        tiktok: 'https://www.tiktok.com/@victorflorian36?lang=en-GB',
+                        spotify: 'https://open.spotify.com/artist/1crZh91hhbhd86zROEniW7?si=IFkgGsUQTI2OIAFOgtYrxw'
+                    },
                     albums: [
                         {
                             title: 'Singles',
@@ -95,7 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     image: '../assets/Artisti/ADELISHA/Adelisha1.jpeg',
                     description: '',
                     specialties: [],
-                    socials: { instagram: '', tiktok: '', facebook: '' },
+                    socials: {
+                        instagram: 'https://www.instagram.com/adelishaofficial/',
+                        tiktok: 'https://www.tiktok.com/@adelishaofficial?lang=en-GB',
+                        spotify: 'https://open.spotify.com/artist/0d9zGzUaeGrCwEBSjK4oNT'
+                    },
                     albums: [
                         { title: 'Singles', year: '', tracks: [['Pleci', '', 'SNlC-D5N-bk']] }
                     ]
@@ -105,7 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     image: '../assets/Artisti/CIUCAN/Ciucan1.jpeg',
                     description: '',
                     specialties: [],
-                    socials: { instagram: '', tiktok: '', facebook: '' },
+                    socials: {
+                        instagram: 'https://www.instagram.com/luca_ciucan/',
+                        tiktok: '',
+                        spotify: 'https://open.spotify.com/artist/72U20vgtNONwk387rX7iTW'
+                    },
                     albums: [
                         {
                             title: 'Singles',
@@ -122,7 +142,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     image: '../assets/Artisti/AMON/Amon1.jpeg',
                     description: '',
                     specialties: [],
-                    socials: { instagram: '', tiktok: '', facebook: '' },
+                    socials: {
+                        instagram: 'https://www.instagram.com/amon.nvd/',
+                        tiktok: '',
+                        spotify: ''
+                    },
                     albums: [
                         { title: 'Singles', year: '', tracks: [['Flori', '', 'GsbOJzByv2k']] }
                     ]
@@ -242,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const platformIcons = {
                 instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg>',
                 tiktok: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.7 5.1c.7 1.8 2.1 3.2 4 3.9v3.2a8.7 8.7 0 0 1-4-1.1v5.2a5.8 5.8 0 1 1-5-5.7v3.2a2.7 2.7 0 1 0 1.8 2.5V3h3.2c0 .7.2 1.4.4 2.1Z"/></svg>',
-                facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path fill="#09090b" d="M13.5 20v-7h2.3l.4-2.7h-2.7V8.6c0-.8.3-1.4 1.4-1.4h1.5V4.8c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v1.8H8.2V13h2.3v7h2.9Z"/></svg>'
+                spotify: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7 9c3.4-1 7.4-.7 10.2.8" fill="none" stroke="#09090b" stroke-width="1.5" stroke-linecap="round"/><path d="M7.7 12c2.8-.8 6.3-.5 8.8.7" fill="none" stroke="#09090b" stroke-width="1.5" stroke-linecap="round"/><path d="M8.4 14.8c2.2-.5 4.8-.3 7 .6" fill="none" stroke="#09090b" stroke-width="1.5" stroke-linecap="round"/></svg>'
             };
             bioSocials.replaceChildren();
             Object.entries(artist.socials).forEach(([platform, url]) => {
